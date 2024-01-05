@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/fragment1">
+
+    <fragment
+        android:id="@+id/fragment1"
+        android:name="com.example.madcamp_week2_fe.orderInfo.OrderInfoFragment"
+        android:label="Fragment1" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.madcamp_week2_fe.Mypage.MypageFragment"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/fragment2"
+        android:name="com.example.madcamp_week2_fe.Home.HomeFragment"
+        android:label="Fragment2" />
+    <fragment
+        android:id="@+id/fragment3"
+        android:name="com.example.madcamp_week2_fe.Mypage.MypageFragment"
+        android:label="Fragment3" />
+</navigation>

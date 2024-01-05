@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/orderInfo"
+        android:icon="@drawable/orderinfo"
+        android:title="주문목록"
+        android:enabled="true"
+        />
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/home"
+        android:title="홈"
+        android:enabled="true"
+        />
+    <item
+        android:id="@+id/myPage"
+        android:icon="@drawable/mypage"
+        android:title="주문목록"
+        android:enabled="true"
+        />
+
+</menu>
