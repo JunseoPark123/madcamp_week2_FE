@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager
 import com.example.madcamp_week2_fe.Home.HomeFragment
 import com.example.madcamp_week2_fe.Mypage.MypageFragment
 import com.example.madcamp_week2_fe.databinding.ActivityMainBinding
-import com.example.madcamp_week2_fe.orderInfo.OrderInfoFragment
+import com.example.madcamp_week2_fe.OrderInfo.OrderInfoFragment
 
 
 private const val TAG_ORDERINFO = "orderinfo_fragment"
