@@ -1,4 +1,4 @@
-package com.example.madcamp_week2_fe.orderInfo
+package com.example.madcamp_week2_fe.OrderInfo
 
 import android.os.Bundle
 import android.view.LayoutInflater
