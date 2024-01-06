@@ -1,10 +1,10 @@
-    package com.example.madcamp_week2_fe
+package com.example.madcamp_week2_fe
 
-    import okhttp3.OkHttpClient
-    import okhttp3.logging.HttpLoggingInterceptor
-    import retrofit2.Retrofit
-    import retrofit2.converter.gson.GsonConverterFactory
-    import java.util.concurrent.TimeUnit
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
     object RetrofitClient {
         private var instance: Retrofit? = null

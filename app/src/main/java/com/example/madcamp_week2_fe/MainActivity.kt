@@ -3,10 +3,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.madcamp_week2_fe.Home.HomeFragment
-import com.example.madcamp_week2_fe.Mypage.MypageFragment
+import com.example.madcamp_week2_fe.home.HomeFragment
+import com.example.madcamp_week2_fe.dibs.DibsFragment
 import com.example.madcamp_week2_fe.databinding.ActivityMainBinding
-import com.example.madcamp_week2_fe.OrderInfo.OrderInfoFragment
+import com.example.madcamp_week2_fe.orderinfo.OrderInfoFragment
 
 
 private const val TAG_ORDERINFO = "orderinfo_fragment"
@@ -23,12 +23,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setFragment(TAG_HOME, HomeFragment())
+        binding.navigationView.selectedItemId = R.id.home
 
         binding.navigationView.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.orderInfo -> setFragment(TAG_ORDERINFO, OrderInfoFragment())
                 R.id.home -> setFragment(TAG_HOME, HomeFragment())
-                R.id.myPage -> setFragment(TAG_MYPAGE, MypageFragment())
+                R.id.myPage -> setFragment(TAG_MYPAGE, DibsFragment())
             }
             true
         }

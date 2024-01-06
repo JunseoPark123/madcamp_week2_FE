@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/fragment1"
-        android:name="com.example.madcamp_week2_fe.OrderInfo.OrderInfoFragment"
+        android:name="com.example.madcamp_week2_fe.orderinfo.OrderInfoFragment"
         android:label="Fragment1" />
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.example.madcamp_week2_fe.Mypage.MypageFragment"
+        android:name="com.example.madcamp_week2_fe.dibs.DibsFragment"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
     <fragment
         android:id="@+id/fragment2"
-        android:name="com.example.madcamp_week2_fe.Home.HomeFragment"
+        android:name="com.example.madcamp_week2_fe.home.HomeFragment"
         android:label="Fragment2" />
     <fragment
         android:id="@+id/fragment3"
-        android:name="com.example.madcamp_week2_fe.Mypage.MypageFragment"
+        android:name="com.example.madcamp_week2_fe.dibs.DibsFragment"
         android:label="Fragment3" />
 </navigation>

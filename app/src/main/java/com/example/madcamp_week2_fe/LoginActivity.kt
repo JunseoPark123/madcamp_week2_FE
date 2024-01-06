@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
 
         loginButton.setOnClickListener {
             // 로그인 버튼 클릭시 로그인 관련 함수 실행
-            val intent = Intent(this@LoginActivity, LocationActivity::class.java)
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
         }

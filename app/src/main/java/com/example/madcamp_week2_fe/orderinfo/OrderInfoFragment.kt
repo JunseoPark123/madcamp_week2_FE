@@ -1,4 +1,4 @@
-package com.example.madcamp_week2_fe.Mypage
+package com.example.madcamp_week2_fe.orderinfo
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.madcamp_week2_fe.R
 
-class MypageFragment : Fragment() {
+class OrderInfoFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_mypage, container, false)
+        val frag = inflater.inflate(R.layout.fragment_orderinfo, container, false)
 
-        return view
+        return frag
     }
 }
