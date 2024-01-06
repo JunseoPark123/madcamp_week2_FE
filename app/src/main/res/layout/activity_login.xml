@@ -21,6 +21,8 @@
         android:id="@+id/breakfirst"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/breakfirst"
         android:textColor="#CC4D28"
@@ -32,6 +34,8 @@
         android:id="@+id/loginAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/inter_bold"
         android:text="Login Account"
         android:textColor="@color/black"
@@ -43,6 +47,8 @@
         android:id="@+id/welcomeMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/inter_black"
         android:text="Hello, welcome to our serviece"
         android:textColor="#595959"
@@ -84,7 +90,7 @@
         app:srcCompat="@drawable/email" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
@@ -96,16 +102,15 @@
         app:layout_constraintTop_toBottomOf="@+id/line1" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/or"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="17dp"
+        android:layout_marginTop="10dp"
         android:text="or"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/line4"
         app:layout_constraintStart_toEndOf="@+id/line3"
-        app:layout_constraintTop_toBottomOf="@+id/button_login" />
+        app:layout_constraintTop_toBottomOf="@+id/next" />
 
     <ImageView
         android:id="@+id/line1"
@@ -144,7 +149,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_login"
+        android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp"
@@ -154,7 +159,8 @@
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Invalid" />
+        app:layout_constraintTop_toBottomOf="@+id/Invalid"
+        android:enabled="false" />
 
     <ImageView
         android:id="@+id/line3"
@@ -165,7 +171,7 @@
         android:layout_marginEnd="234dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_login"
+        app:layout_constraintTop_toBottomOf="@+id/next"
         app:srcCompat="@drawable/line_3" />
 
 
@@ -178,58 +184,58 @@
         android:layout_marginEnd="38dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_login"
+        app:layout_constraintTop_toBottomOf="@+id/next"
         app:srcCompat="@drawable/line_3" />
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_kakao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="67dp"
-        android:background="@drawable/some_id"
-        android:fontFamily="@font/inter_bold"
-        android:text="카카오 로그인"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
     <ImageView
         android:id="@+id/kakao_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="7dp"
+        android:layout_height="0dp"
         android:layout_marginStart="68dp"
         android:layout_marginTop="488dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/kakaologo" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_kakao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="55dp"
+        android:background="@drawable/some_id"
+        android:fontFamily="@font/inter_bold"
+        android:text="카카오 로그인"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/or" />
+
 
     <TextView
         android:id="@+id/NotReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="100dp"
         android:text="Not registed yet?"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/CreateAcc"
+        android:textColor="#979797"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_kakao" />
-
 
     <TextView
         android:id="@+id/CreateAcc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:layout_marginEnd="39dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="100dp"
         android:text="Create an Account"
-        android:textColor="#ff0000"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="#FF800B"
+        android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/NotReg"
         app:layout_constraintTop_toBottomOf="@+id/button_kakao" />
 

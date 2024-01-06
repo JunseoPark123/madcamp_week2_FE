@@ -33,7 +33,7 @@
         android:id="@+id/registerfinish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/RegisterFinish"
+        android:src="@drawable/registerfinish"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.343"
@@ -42,7 +42,7 @@
         app:layout_constraintVertical_bias="0.566" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_login"
+        android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="130dp"
