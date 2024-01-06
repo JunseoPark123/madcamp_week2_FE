@@ -10,21 +10,23 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 
-class LoginActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_register)
 
         val btnBack: ImageView = findViewById(R.id.left_arrow)
         btnBack.setOnClickListener {
-            val intent = Intent(this@LoginActivity, LoginRegisterActivity::class.java)
+            val intent = Intent(this@RegisterActivity, LoginRegisterActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        val loginButton : Button = findViewById(R.id.next)
-        val password : EditText = findViewById(R.id.phone)
-        val email : EditText = findViewById(R.id.email)
+        val toLocation : Button = findViewById(R.id.next)
+        val password: EditText = findViewById(R.id.phone)
+        val email: EditText = findViewById(R.id.email)
+        val name: EditText = findViewById(R.id.name)
+        val phone: EditText = findViewById(R.id.phone)
 
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -33,8 +35,8 @@ class LoginActivity : AppCompatActivity() {
 
             @SuppressLint("ResourceAsColor")
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // 두 EditText에 모두 텍스트가 있는지 확인합니다. 변경 후 텍스트, 변경 시작 위치, 변경 되기 전 길이, 새로 추가되거나 변경된 문자의 수
-                loginButton.isEnabled = email.text.trim().isNotEmpty() && password.text.trim().isNotEmpty()
+                // 네 EditText에 모두 텍스트가 있는지 확인합니다. 변경 후 텍스트, 변경 시작 위치, 변경 되기 전 길이, 새로 추가되거나 변경된 문자의 수
+                toLocation.isEnabled = email.text.trim().isNotEmpty() && password.text.trim().isNotEmpty() && name.text.trim().isNotEmpty() && phone.text.trim().isNotEmpty()
 
             }
             override fun afterTextChanged(s: Editable?) {
@@ -42,15 +44,20 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        // 두 EditText에 TextWatcher를 설정합니다.
         email.addTextChangedListener(textWatcher)
         password.addTextChangedListener(textWatcher)
+        name.addTextChangedListener(textWatcher)
+        phone.addTextChangedListener(textWatcher)
 
-        loginButton.setOnClickListener {
+        toLocation.setOnClickListener {
             // 로그인 버튼 클릭시 로그인 관련 함수 실행
-            val intent = Intent(this@LoginActivity, LocationActivity::class.java)
+            val intent = Intent(this@RegisterActivity, LocationActivity::class.java)
             startActivity(intent)
             finish()
         }
+
     }
+
+
+
 }

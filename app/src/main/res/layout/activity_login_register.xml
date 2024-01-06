@@ -6,4 +6,96 @@
     android:layout_height="match_parent"
     tools:context=".LoginRegisterActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/startlogo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.185" />
+
+    <TextView
+        android:id="@+id/exp_kor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:gravity="center_horizontal"
+        android:text="자취생을 위한 건강한 식사 방법"
+        android:textSize="24sp"
+        android:fontFamily="@font/inter_extrabold"
+        app:layout_constraintBottom_toTopOf="@+id/exp_eng"
+        android:textColor="#CC4D28"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/exp_eng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="140dp"
+        android:fontFamily="@font/inter_black"
+        android:gravity="center_horizontal"
+        android:text="Find your healthy Meals\n at the best prices with breakfirst app !!!"
+        android:textColor="#595959"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.358" />
+
+    <View
+        android:id="@+id/rectangle_9"
+        android:layout_width="428dp"
+        android:layout_height="180dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/rectangle_9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exp_eng"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/rectangle_5"
+        android:fontFamily="@font/inter_black"
+        android:text="Login"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_9"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_9"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_9" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_create_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/rectangle_6"
+        android:fontFamily="@font/inter_black"
+        android:text="Create an Account"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_9"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_9"
+        app:layout_constraintTop_toBottomOf="@+id/next" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
