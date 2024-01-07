@@ -23,10 +23,12 @@ class HomeGridAdapter(private val context: Context, private val items: List<Home
 
         val item = items[position]
         val imageView = view.findViewById<ImageView>(R.id.image)
-        val textView = view.findViewById<TextView>(R.id.text)
+        val storeText = view.findViewById<TextView>(R.id.store)
+        val productText = view.findViewById<TextView>(R.id.product)
 
         imageView.setImageResource(item.imageResource)
-        textView.text = item.text
+        storeText.text = item.store
+        productText.text = item.product
 
         return view
     }

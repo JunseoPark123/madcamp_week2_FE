@@ -2,6 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="click">#CC4D28</color>
-    <color name="nonClick">#737977</color>
+    <color name="click">#FF621F</color>
+    <color name="nonClick">#FF9B63</color>
 </resources>

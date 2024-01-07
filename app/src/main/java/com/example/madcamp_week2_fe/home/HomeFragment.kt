@@ -17,10 +17,10 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
         val items = listOf(
-            HomeGridItem(R.drawable.image1, "Text 1"),
-            HomeGridItem(R.drawable.image2, "Text 2"),
-            HomeGridItem(R.drawable.image3, "Text 3"),
-            HomeGridItem(R.drawable.image4, "Text 4"),
+            HomeGridItem(R.drawable.image1, "재령이네 과일가게", "비타민 과일 박스 세트"),
+            HomeGridItem(R.drawable.image2, "준서네 반찬가게", "매콤달콤 진미채 박스"),
+            HomeGridItem(R.drawable.image3, "준서네 반찬가게", "명절 반찬 박스 세트"),
+            HomeGridItem(R.drawable.image4, "재령이네 과일가게", "영양소 듬뿍 상큼 과일 박스"),
         )
 
         val gridView: GridView = view.findViewById(R.id.homeGridView)

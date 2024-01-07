@@ -17,12 +17,24 @@
             android:scaleType="centerCrop" />
 
         <TextView
-            android:id="@+id/text"
+            android:id="@+id/store"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:gravity="center"
-            android:fontFamily="@font/poppins_extrabold"/>
+            android:fontFamily="@font/poppins_extrabold"
+            android:textColor="#8C8C8C"
+            android:textSize="10sp"/>
+
+        <TextView
+            android:id="@+id/product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:gravity="center"
+            android:fontFamily="@font/poppins_extrabold"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
 
     </LinearLayout>
 
