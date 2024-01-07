@@ -14,19 +14,26 @@ class LocationActivity : AppCompatActivity() {
 
         val btnBack: ImageView = findViewById(R.id.left_arrow)
         btnBack.setOnClickListener {
-            val intent = Intent(this@LocationActivity, RegisterActivity::class.java)
-            startActivity(intent)
+            val source = intent.getStringExtra("source")
+            if (source == "RegisterActivity") {
+                startActivity(Intent(this, RegisterActivity::class.java))
+            }
+            else {
+                startActivity(Intent(this, MainActivity::class.java))
+            }
             finish()
         }
 
 
-
         val toRegisterFinish : Button = findViewById(R.id.next)
-
         toRegisterFinish.setOnClickListener {
-            // 로그인 버튼 클릭시 로그인 관련 함수 실행
-            val intent = Intent(this@LocationActivity, RegisterFinishActivity::class.java)
-            startActivity(intent)
+            val source = intent.getStringExtra("source")
+            if (source == "RegisterActivity") {
+                startActivity(Intent(this, RegisterFinishActivity::class.java))
+            }
+            else {
+                startActivity(Intent(this, MainActivity::class.java))
+            }
             finish()
         }
 

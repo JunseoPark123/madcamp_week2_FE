@@ -50,10 +50,9 @@ class RegisterActivity : AppCompatActivity() {
         phone.addTextChangedListener(textWatcher)
 
         toLocation.setOnClickListener {
-            // 로그인 버튼 클릭시 로그인 관련 함수 실행
             val intent = Intent(this@RegisterActivity, LocationActivity::class.java)
+            intent.putExtra("source", "RegisterActivity")
             startActivity(intent)
-            finish()
         }
 
     }

@@ -10,6 +10,7 @@ import com.example.madcamp_week2_fe.R
 class OrderInfoAdapter(private val orderList: List<OrderInfo>) :
     RecyclerView.Adapter<OrderInfoAdapter.OrderInfoViewHolder>() {
 
+
     class OrderInfoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val profileImage: ImageView = view.findViewById(R.id.profileImage)
     }

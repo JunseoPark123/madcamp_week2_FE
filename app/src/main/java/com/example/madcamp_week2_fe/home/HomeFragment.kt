@@ -1,11 +1,14 @@
 package com.example.madcamp_week2_fe.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.example.madcamp_week2_fe.LocationActivity
 import com.example.madcamp_week2_fe.R
 
 class HomeFragment : Fragment() {
@@ -22,6 +25,12 @@ class HomeFragment : Fragment() {
             HomeGridItem(R.drawable.image3, "준서네 반찬가게", "명절 반찬 박스 세트"),
             HomeGridItem(R.drawable.image4, "재령이네 과일가게", "영양소 듬뿍 상큼 과일 박스"),
         )
+
+        val location: ImageView = view.findViewById(R.id.location)
+        location.setOnClickListener {
+            val intent = Intent(activity, LocationActivity::class.java)
+            startActivity(intent)
+        }
 
         val gridView: GridView = view.findViewById(R.id.homeGridView)
         val adapter = HomeGridAdapter(requireContext(), items)

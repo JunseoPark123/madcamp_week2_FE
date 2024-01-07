@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week2_fe.R
+import com.example.madcamp_week2_fe.home.HomeFragment
 
 class OrderInfoFragment : Fragment() {
 
@@ -15,13 +18,17 @@ class OrderInfoFragment : Fragment() {
     private lateinit var orderInfoAdapter: OrderInfoAdapter
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_orderinfo, container, false)
         recyclerView = view.findViewById(R.id.recyclerView) // RecyclerView ID 설정
         initializeRecyclerView()
+
+        val leftArrow: ImageView = view.findViewById(R.id.left_arrow)
+
+        leftArrow.setOnClickListener {
+            navigateToHomeFragment()
+        }
+
         return view
     }
 
@@ -39,5 +46,13 @@ class OrderInfoFragment : Fragment() {
             OrderInfo(R.drawable.image3),
             OrderInfo(R.drawable.image4)
         )
+    }
+
+    private fun navigateToHomeFragment() {
+        val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+        fragmentManager.beginTransaction()
+            .replace(R.id.mainFrameLayout, HomeFragment())
+            .addToBackStack(null)  // 옵션: 뒤로 가기 스택에 추가
+            .commit()
     }
 }
