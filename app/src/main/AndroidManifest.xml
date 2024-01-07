@@ -19,25 +19,25 @@
             android:name=".home.ItemInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".LocationActivity"
+            android:name=".ready.LocationActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterFinishActivity"
+            android:name=".ready.RegisterFinishActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ready.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginRegisterActivity"
+            android:name=".ready.LoginRegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ready.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".ready.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

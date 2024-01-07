@@ -1,10 +1,11 @@
-package com.example.madcamp_week2_fe
+package com.example.madcamp_week2_fe.ready
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import com.example.madcamp_week2_fe.R
 
 class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

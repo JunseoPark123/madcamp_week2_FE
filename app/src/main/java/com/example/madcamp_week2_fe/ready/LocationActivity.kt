@@ -1,10 +1,12 @@
-package com.example.madcamp_week2_fe
+package com.example.madcamp_week2_fe.ready
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import com.example.madcamp_week2_fe.MainActivity
+import com.example.madcamp_week2_fe.R
 
 class LocationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

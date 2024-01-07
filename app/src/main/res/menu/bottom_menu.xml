@@ -14,8 +14,8 @@
         />
     <item
         android:id="@+id/myPage"
-        android:icon="@drawable/mypage"
-        android:title="주문목록"
+        android:icon="@drawable/heart"
+        android:title="찜한 가게"
         android:enabled="true"
         />
 

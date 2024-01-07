@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.GridView
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import com.example.madcamp_week2_fe.LocationActivity
+import com.example.madcamp_week2_fe.ready.LocationActivity
 import com.example.madcamp_week2_fe.R
 
 class HomeFragment : Fragment() {
