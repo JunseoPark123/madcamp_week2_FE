@@ -32,9 +32,25 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        val cart: ImageView = view.findViewById(R.id.cart)
+        cart.setOnClickListener {
+            val intent = Intent(activity, CartActivity::class.java)
+            startActivity(intent)
+        }
+
         val gridView: GridView = view.findViewById(R.id.homeGridView)
         val adapter = HomeGridAdapter(requireContext(), items)
         gridView.adapter = adapter
+
+        gridView.setOnItemClickListener { _, _, position, _ ->
+            val item = items[position]
+            val intent = Intent(activity, ItemInfoActivity::class.java)
+//            필요한 경우, item의 정보를 Intent에 추가
+//            intent.putExtra("itemImage", item.imageResource)
+//            intent.putExtra("itemName", item.name)
+//            intent.putExtra("itemDescription", item.description)
+            startActivity(intent)
+        }
 
         return view
     }

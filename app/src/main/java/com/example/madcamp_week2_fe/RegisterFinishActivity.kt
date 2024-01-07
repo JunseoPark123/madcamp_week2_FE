@@ -11,9 +11,9 @@ class RegisterFinishActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_finish)
 
-        val MainButton : Button = findViewById(R.id.next)
+        val mainButton : Button = findViewById(R.id.next)
 
-        MainButton.setOnClickListener {
+        mainButton.setOnClickListener {
             // 로그인 버튼 클릭시 로그인 관련 함수 실행
             val intent = Intent(this@RegisterFinishActivity, MainActivity::class.java)
             startActivity(intent)
