@@ -22,14 +22,14 @@ class DibsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_dibs, container, false)
         recyclerView = view.findViewById(R.id.recyclerView) // RecyclerView ID를 찾아 설정합니다.
         initializeRecyclerView()
-        val leftArrow: ImageView = view.findViewById(R.id.left_arrow)
 
+        val leftArrow: ImageView = view.findViewById(R.id.left_arrow)
         leftArrow.setOnClickListener {
             (activity as? MainActivity)?.navigateToFragment(TAG_HOME)
         }
+
         return view
     }
-
     private fun initializeRecyclerView() {
         val adapter = DibsAdapter()
         recyclerView.layoutManager = LinearLayoutManager(activity)
