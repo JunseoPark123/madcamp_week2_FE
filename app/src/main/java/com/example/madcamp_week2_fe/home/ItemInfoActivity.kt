@@ -10,10 +10,12 @@ import com.example.madcamp_week2_fe.MainActivity
 import com.example.madcamp_week2_fe.R
 
 class ItemInfoActivity : AppCompatActivity() {
+    private var accessToken: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_info)
-
+        accessToken = intent.getStringExtra("access_token")
 
         val btnBack: ImageView = findViewById(R.id.left_arrow)
         btnBack.setOnClickListener {
@@ -25,8 +27,10 @@ class ItemInfoActivity : AppCompatActivity() {
 
         val btnCart: Button = findViewById(R.id.cart)
         btnCart.setOnClickListener {
-            val intent = Intent(this@ItemInfoActivity, CartActivity::class.java)
-            intent.putExtra("source", "ItemInfoActivity")
+            val intent = Intent(this@ItemInfoActivity, CartActivity::class.java).apply {
+                putExtra("source", "ItemInfoActivity")
+                putExtra("access_token", accessToken)
+            }
             startActivity(intent)
         }
 

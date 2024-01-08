@@ -3,6 +3,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.madcamp_week2_fe.home.HomeFragment
 import com.example.madcamp_week2_fe.dibs.DibsFragment
 import com.example.madcamp_week2_fe.databinding.ActivityMainBinding
@@ -16,11 +17,14 @@ public const val TAG_DIBS = "dibs_fragment"
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
+    var accessToken: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        accessToken = intent.getStringExtra("access_token")
 
         setFragment(TAG_HOME, HomeFragment())
         binding.navigationView.selectedItemId = R.id.home
@@ -39,44 +43,45 @@ class MainActivity : AppCompatActivity() {
         val manager: FragmentManager = supportFragmentManager
         val fragTransaction = manager.beginTransaction()
 
-        if (manager.findFragmentByTag(tag) == null){
-            fragTransaction.add(R.id.mainFrameLayout, fragment, tag)
-        }
-
-        val orderInfo = manager.findFragmentByTag(TAG_ORDERINFO)
-        val home = manager.findFragmentByTag(TAG_HOME)
-        val dibs = manager.findFragmentByTag(TAG_DIBS)
-
-        if (orderInfo != null){
-            fragTransaction.hide(orderInfo)
-        }
-
-        if (home != null){
-            fragTransaction.hide(home)
-        }
-
-        if (dibs != null) {
-            fragTransaction.hide(dibs)
-        }
-
-        if (tag == TAG_ORDERINFO) {
-            if (orderInfo!=null){
-                fragTransaction.show(orderInfo)
-            }
-        }
-        else if (tag == TAG_HOME) {
-            if (home != null) {
-                fragTransaction.show(home)
+        // 기존에 있는 프래그먼트를 찾거나 새로운 프래그먼트를 생성합니다.
+        val currentFragment = manager.findFragmentByTag(tag)
+        val newFragment = if (currentFragment != null) {
+                currentFragment
+        } else {
+            when (tag) {
+                TAG_HOME -> HomeFragment().apply {
+                    // HomeFragment에 엑세스 토큰을 번들로 전달합니다.
+                    arguments = Bundle().apply {
+                        putString("access_token", accessToken)
+                    }
+                }
+                TAG_ORDERINFO -> OrderInfoFragment()
+                TAG_DIBS -> DibsFragment()
+                else -> HomeFragment()
             }
         }
 
-        else if (tag == TAG_DIBS){
-            if (dibs != null){
-                fragTransaction.show(dibs)
-            }
+        // 다른 프래그먼트를 숨깁니다.
+        hideAllFragments(fragTransaction)
+
+        // 새 프래그먼트를 추가하거나 기존 프래그먼트를 보여줍니다.
+        if (currentFragment == null) {
+            fragTransaction.add(R.id.mainFrameLayout, newFragment, tag)
+        } else {
+            fragTransaction.show(newFragment)
         }
 
         fragTransaction.commitAllowingStateLoss()
+    }
+
+    private fun hideAllFragments(transaction: FragmentTransaction) {
+        val orderInfo = supportFragmentManager.findFragmentByTag(TAG_ORDERINFO)
+        val home = supportFragmentManager.findFragmentByTag(TAG_HOME)
+        val dibs = supportFragmentManager.findFragmentByTag(TAG_DIBS)
+
+        orderInfo?.let { transaction.hide(it) }
+        home?.let { transaction.hide(it) }
+        dibs?.let { transaction.hide(it) }
     }
 
     fun navigateToFragment(tag: String) {

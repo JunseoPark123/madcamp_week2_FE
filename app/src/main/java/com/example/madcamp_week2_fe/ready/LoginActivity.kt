@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -76,14 +77,15 @@ class LoginActivity : AppCompatActivity() {
                     // 로그인 성공
                     val loginResponse = response.body()!!
                     withContext(Dispatchers.Main) {
+                        Log.d("LoginActivity", "Access Token: ${loginResponse.access_token}")
                         val intent = Intent(this@LoginActivity,  MainActivity::class.java).apply {
                         // 필요한 경우 loginResponse의 데이터를 Intent에 추가
-                        putExtra("access_token", loginResponse.access_token)
-                        putExtra("refresh_token", loginResponse.refresh_token)
-                        putExtra("email", loginResponse.email)
-                        putExtra("username", loginResponse.username)
-                        putExtra("phone_number", loginResponse.phone_number)
-                        putExtra("current_location", loginResponse.current_location)
+                            putExtra("access_token", loginResponse.access_token)
+                            putExtra("refresh_token", loginResponse.refresh_token)
+                            putExtra("email", loginResponse.email)
+                            putExtra("username", loginResponse.username)
+                            putExtra("phone_number", loginResponse.phone_number)
+                            putExtra("current_location", loginResponse.current_location)
                     }
                         startActivity(intent)
                         finish()

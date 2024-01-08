@@ -19,10 +19,12 @@ import java.lang.Exception
 class HomeFragment : Fragment() {
     private val storeApi: StoreApiService = RetrofitClient.getInstance().create(StoreApiService::class.java)
     private var items: MutableList<HomeGridItem> = mutableListOf()
+    private var accessToken: String? = null
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-
+        accessToken = arguments?.getString("access_token")
 
         val location: ImageView = view.findViewById(R.id.location)
         location.setOnClickListener {
@@ -32,7 +34,9 @@ class HomeFragment : Fragment() {
 
         val cart: ImageView = view.findViewById(R.id.cart)
         cart.setOnClickListener {
-            val intent = Intent(activity, CartActivity::class.java)
+            val intent = Intent(activity, CartActivity::class.java).apply {
+                putExtra("access_token", accessToken)
+            }
             startActivity(intent)
         }
 
@@ -75,6 +79,7 @@ class HomeFragment : Fragment() {
             val item = items[position] // 여기에서 멤버 변수 사용
             val intent = Intent(activity, ItemInfoActivity::class.java).apply {
                 // 필요한 경우 loginResponse의 데이터를 Intent에 추가
+                putExtra("access_token", accessToken)
                 putExtra("store", item.store)
                 putExtra("menuName", item.menuName)
                 putExtra("detailName1", item.detailName1)

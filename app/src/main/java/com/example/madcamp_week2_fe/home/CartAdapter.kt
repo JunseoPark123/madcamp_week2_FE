@@ -1,26 +1,31 @@
-package com.example.madcamp_week2_fe.home
+package com.example.madcamp_week2_fe
 
+import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.madcamp_week2_fe.R
+import com.example.madcamp_week2_fe.databinding.CartItemBinding
+import com.example.madcamp_week2_fe.home.CartItem // 이 부분의 패키지를 확인하세요
 
-class CartAdapter(private val items: List<CartItem>) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
+class CartAdapter(private val context: Context, private val items: List<com.example.madcamp_week2_fe.home.CartItem>) :
+    RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
-    class CartViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val imageView: ImageView = view.findViewById(R.id.image)
+    class CartViewHolder(val binding: CartItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: CartItem) {
+            binding.menu.text = item.product_name
+            binding.price.text = "${item.price}원"
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.cart_item, parent, false)
-        return CartViewHolder(view)
+        val inflater = LayoutInflater.from(context)
+        val binding = CartItemBinding.inflate(inflater, parent, false)
+        return CartViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val item = items[position]
-        holder.imageView.setImageResource(item.imageResourceId)
+        holder.bind(item)
     }
 
     override fun getItemCount() = items.size
