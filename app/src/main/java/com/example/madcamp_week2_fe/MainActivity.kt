@@ -9,9 +9,9 @@ import com.example.madcamp_week2_fe.databinding.ActivityMainBinding
 import com.example.madcamp_week2_fe.orderinfo.OrderInfoFragment
 
 
-private const val TAG_ORDERINFO = "orderinfo_fragment"
-private const val TAG_HOME = "home_fragment"
-private const val TAG_MYPAGE = "mypage_fragment"
+public const val TAG_ORDERINFO = "orderinfo_fragment"
+public const val TAG_HOME = "home_fragment"
+public const val TAG_DIBS = "dibs_fragment"
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             when(item.itemId) {
                 R.id.orderInfo -> setFragment(TAG_ORDERINFO, OrderInfoFragment())
                 R.id.home -> setFragment(TAG_HOME, HomeFragment())
-                R.id.myPage -> setFragment(TAG_MYPAGE, DibsFragment())
+                R.id.dibs -> setFragment(TAG_DIBS, DibsFragment())
             }
             true
         }
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         val orderInfo = manager.findFragmentByTag(TAG_ORDERINFO)
         val home = manager.findFragmentByTag(TAG_HOME)
-        val myPage = manager.findFragmentByTag(TAG_MYPAGE)
+        val dibs = manager.findFragmentByTag(TAG_DIBS)
 
         if (orderInfo != null){
             fragTransaction.hide(orderInfo)
@@ -55,8 +55,8 @@ class MainActivity : AppCompatActivity() {
             fragTransaction.hide(home)
         }
 
-        if (myPage != null) {
-            fragTransaction.hide(myPage)
+        if (dibs != null) {
+            fragTransaction.hide(dibs)
         }
 
         if (tag == TAG_ORDERINFO) {
@@ -70,12 +70,27 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        else if (tag == TAG_MYPAGE){
-            if (myPage != null){
-                fragTransaction.show(myPage)
+        else if (tag == TAG_DIBS){
+            if (dibs != null){
+                fragTransaction.show(dibs)
             }
         }
 
         fragTransaction.commitAllowingStateLoss()
+    }
+
+    fun navigateToFragment(tag: String) {
+        setFragment(tag, when (tag) {
+            TAG_HOME -> HomeFragment()
+            TAG_ORDERINFO -> OrderInfoFragment()
+            TAG_DIBS -> DibsFragment()
+            else -> HomeFragment()
+        })
+        binding.navigationView.selectedItemId = when (tag) {
+            TAG_HOME -> R.id.home
+            TAG_ORDERINFO -> R.id.orderInfo
+            TAG_DIBS -> R.id.dibs
+            else -> R.id.home
+        }
     }
 }

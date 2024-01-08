@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit
                     .build()
 
                 instance = Retrofit.Builder()
-                    .baseUrl("http://13.125.10.254:5000/")
+                    .baseUrl("http://ec2-3-34-151-36.ap-northeast-2.compute.amazonaws.com/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client) // Retrofit 객체에 OkHttpClient 적용
                     .build()

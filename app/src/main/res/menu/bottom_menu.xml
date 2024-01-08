@@ -13,7 +13,7 @@
         android:enabled="true"
         />
     <item
-        android:id="@+id/myPage"
+        android:id="@+id/dibs"
         android:icon="@drawable/heart"
         android:title="찜한 가게"
         android:enabled="true"

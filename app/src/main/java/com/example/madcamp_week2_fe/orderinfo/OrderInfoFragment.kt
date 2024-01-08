@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.madcamp_week2_fe.MainActivity
 import com.example.madcamp_week2_fe.R
+import com.example.madcamp_week2_fe.TAG_HOME
 import com.example.madcamp_week2_fe.home.HomeFragment
 
 class OrderInfoFragment : Fragment() {
@@ -26,7 +28,7 @@ class OrderInfoFragment : Fragment() {
         val leftArrow: ImageView = view.findViewById(R.id.left_arrow)
 
         leftArrow.setOnClickListener {
-            navigateToHomeFragment()
+            (activity as? MainActivity)?.navigateToFragment(TAG_HOME)
         }
 
         return view
