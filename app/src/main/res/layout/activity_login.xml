@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/breakfirst"
         android:textColor="#CC4D28"
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/inter_bold"
         android:text="Login Account"
         android:textColor="@color/black"
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="6dp"
         android:fontFamily="@font/inter_black"
         android:text="Hello, welcome to our serviece"
         android:textColor="#595959"
@@ -61,8 +61,8 @@
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="107dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="120dp"
         android:background="@null"
         android:hint="Email ID"
         android:textSize="14dp"
@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line1"
         app:srcCompat="@drawable/password" />
@@ -84,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="102dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeMessage"
         app:srcCompat="@drawable/email" />
@@ -93,32 +93,21 @@
         android:id="@+id/phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
         android:background="@null"
         android:hint="password"
         android:textSize="14dp"
         app:layout_constraintStart_toEndOf="@+id/password_image"
         app:layout_constraintTop_toBottomOf="@+id/line1" />
 
-    <TextView
-        android:id="@+id/or"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="or"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/line4"
-        app:layout_constraintStart_toEndOf="@+id/line3"
-        app:layout_constraintTop_toBottomOf="@+id/next" />
-
     <ImageView
         android:id="@+id/line1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="39dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email"
@@ -128,12 +117,12 @@
         android:id="@+id/line2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="39dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_image"
+        app:layout_constraintTop_toBottomOf="@+id/phone"
         app:srcCompat="@drawable/line_1" />
 
     <TextView
@@ -141,7 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="15dp"
         android:text="Invalid Username or Password. Try Again!"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -152,92 +141,40 @@
         android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="150dp"
         android:background="@drawable/rectangle_3"
+        android:enabled="false"
         android:fontFamily="@font/inter_black"
         android:text="Login"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Invalid"
-        android:enabled="false" />
-
-    <ImageView
-        android:id="@+id/line3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="234dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/next"
-        app:srcCompat="@drawable/line_3" />
-
-
-    <ImageView
-        android:id="@+id/line4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="216dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="38dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/next"
-        app:srcCompat="@drawable/line_3" />
-
-
-    <ImageView
-        android:id="@+id/kakao_logo"
-        android:layout_width="7dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="488dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/kakaologo" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_kakao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="55dp"
-        android:background="@drawable/some_id"
-        android:fontFamily="@font/inter_bold"
-        android:text="카카오 로그인"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/or" />
-
+        app:layout_constraintTop_toBottomOf="@+id/Invalid" />
 
     <TextView
         android:id="@+id/NotReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="32dp"
         android:text="Not registed yet?"
         android:textColor="#979797"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_kakao" />
+        app:layout_constraintTop_toBottomOf="@+id/next" />
 
     <TextView
         android:id="@+id/CreateAcc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="32dp"
         android:text="Create an Account"
         android:textColor="#FF800B"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/NotReg"
-        app:layout_constraintTop_toBottomOf="@+id/button_kakao" />
+        app:layout_constraintTop_toBottomOf="@+id/next" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
