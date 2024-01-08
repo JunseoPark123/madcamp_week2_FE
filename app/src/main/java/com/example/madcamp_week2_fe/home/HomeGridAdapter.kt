@@ -23,8 +23,8 @@ class HomeGridAdapter(private val context: Context, private val items: List<Home
 
         val item = items[position]
         val imageView = view.findViewById<ImageView>(R.id.image)
-        val storeText = view.findViewById<TextView>(R.id.store)
-        val productText = view.findViewById<TextView>(R.id.product)
+        val store = view.findViewById<TextView>(R.id.store)
+        val menuName = view.findViewById<TextView>(R.id.menuName)
         val detail1 = view.findViewById<TextView>(R.id.detail1)
         val detail2 = view.findViewById<TextView>(R.id.detail2)
         val detail3 = view.findViewById<TextView>(R.id.detail3)
@@ -32,11 +32,11 @@ class HomeGridAdapter(private val context: Context, private val items: List<Home
         val amount = view.findViewById<TextView>(R.id.amount)
 
         imageView.setImageResource(item.imageResource)
-        storeText.text = item.store
-        productText.text = item.product
-        detail1.text = item.detail1
-        detail2.text = item.detail2
-        detail3.text = item.detail3
+        store.text = item.store
+        menuName.text = item.menuName
+        detail1.text = item.detailName1
+        detail2.text = item.detailName2
+        detail3.text = item.detailName3
         price.text = item.price.toString()
         amount.text = item.amount.toString()
 

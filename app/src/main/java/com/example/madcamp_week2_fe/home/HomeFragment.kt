@@ -47,14 +47,16 @@ class HomeFragment : Fragment() {
                     HomeGridItem(
                         imageResource = R.drawable.image1,
                         store = menu.store_name,
-                        product = menu.name,
-                        detail1 = menu.details.detail_name1,
-                        detail2 = menu.details.detail_name2,
-                        detail3 = menu.details.detail_name3,
+                        menuName = menu.name,
+                        detailName1 = menu.details.detail_name1,
+                        detailGram1 = menu.details.detail_gram1,
+                        detailName2 = menu.details.detail_name2,
+                        detailGram2 = menu.details.detail_gram2,
+                        detailName3 = menu.details.detail_name3,
+                        detailGram3 = menu.details.detail_gram3,
                         amount = menu.remaining_quantity,
                         price = menu.price,
                         )
-
 
                 }
                 withContext(Dispatchers.Main) {
@@ -71,7 +73,19 @@ class HomeFragment : Fragment() {
 
         gridView.setOnItemClickListener { _, _, position, _ ->
             val item = items[position] // 여기에서 멤버 변수 사용
-            val intent = Intent(activity, ItemInfoActivity::class.java)
+            val intent = Intent(activity, ItemInfoActivity::class.java).apply {
+                // 필요한 경우 loginResponse의 데이터를 Intent에 추가
+                putExtra("store", item.store)
+                putExtra("menuName", item.menuName)
+                putExtra("detailName1", item.detailName1)
+                putExtra("detailGram1", item.detailGram1)
+                putExtra("detailName2", item.detailName2)
+                putExtra("detailGram2", item.detailGram2)
+                putExtra("detailName3", item.detailName3)
+                putExtra("detailGram3", item.detailGram3)
+                putExtra("amount", item.amount)
+                putExtra("price", item.price)
+            }
             // 필요한 경우, item의 정보를 Intent에 추가
             startActivity(intent)
         }
