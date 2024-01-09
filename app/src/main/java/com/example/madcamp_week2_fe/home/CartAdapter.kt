@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week2_fe.databinding.CartItemBinding
 import com.example.madcamp_week2_fe.home.CartItem // 이 부분의 패키지를 확인하세요
 
-class CartAdapter(private val context: Context, val items: MutableList<CartItem>) :
-    RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
+class CartAdapter(private val context: Context, val items: MutableList<CartItem>, private val onDeleteItem: (Int) -> Unit
+) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     class CartViewHolder(val binding: CartItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CartItem) {
@@ -27,6 +27,9 @@ class CartAdapter(private val context: Context, val items: MutableList<CartItem>
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val item = items[position]
         holder.bind(item)
+        holder.binding.trash.setOnClickListener { // 'trash'는 휴지통 ImageView의 ID
+            onDeleteItem(position) // 클릭 시 해당 포지션의 아이템 삭제
+        }
     }
 
     override fun getItemCount() = items.size

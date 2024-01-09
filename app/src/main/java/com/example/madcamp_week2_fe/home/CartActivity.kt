@@ -61,8 +61,44 @@ class CartActivity : AppCompatActivity() {
         val payButton: Button = findViewById(R.id.paybutton)
         payButton.setOnClickListener {
             showPayDialog()
+            val url = "http://ec2-3-34-151-36.ap-northeast-2.compute.amazonaws.com/kakaoPayLogic/"
+            var intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
         }
     }
+    private fun deleteAllCartItems() {
+        cartAdapter?.let { adapter ->
+            for (i in adapter.items.indices.reversed()) {
+                deleteCartItem(i)
+            }
+        }
+    }
+
+    private fun deleteCartItem(position: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = RetrofitClient.getInstance().create(CartApiService::class.java)
+                    .deleteItemFromCart("Bearer $accessToken", position + 1)
+
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        Log.d("CartActivity", "Item successfully deleted at position: $position")
+                        // 여기서는 아이템을 즉시 삭제하지 않고, 로딩된 목록을 새로고침합니다.
+                        loadCartItems()
+                    } else {
+                        val errorMessage = response.errorBody()?.string() ?: "Unknown error"
+                        Log.e("CartActivity", "Failed to delete item: $errorMessage")
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.e("CartActivity", "Error in deleting item: ${e.message}")
+                }
+            }
+        }
+    }
+
+
 
     private fun showPayDialog() {
         AlertDialog.Builder(this)
@@ -78,8 +114,7 @@ class CartActivity : AppCompatActivity() {
     private fun processPayment() {
 
         processOrders()
-
-
+        deleteAllCartItems()
         clearCartItems()
     }
 
@@ -90,7 +125,6 @@ class CartActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
         }
     }
-
 
 
     private fun processOrders() {
@@ -104,18 +138,25 @@ class CartActivity : AppCompatActivity() {
     private fun placeOrder(item: CartItem) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val addToOrderRequest = AddToOrderRequest(item.product_name, item.store_name ?: "", item.price)
-                val response = RetrofitClient.getInstance().create(CartApiService::class.java).addToOrder(
-                    "Bearer $accessToken", addToOrderRequest
-                )
+                val addToOrderRequest =
+                    AddToOrderRequest(item.product_name, item.store_name ?: "", item.price)
+                val response =
+                    RetrofitClient.getInstance().create(CartApiService::class.java).addToOrder(
+                        "Bearer $accessToken", addToOrderRequest
+                    )
                 withContext(Dispatchers.Main) {
                     if (response.isSuccessful) {
                         Log.d("CartActivity", "Order placed successfully for ${item.product_name}")
-                        Toast.makeText(this@CartActivity, "주문이 성공적으로 처리되었습니다.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@CartActivity, "${item.product_name} 주문이 성공적으로 처리되었습니다.", Toast.LENGTH_SHORT)
+                            .show()
                     } else {
                         val errorMessage = response.errorBody()?.string() ?: "Unknown error"
                         Log.e("CartActivity", "Order failed: $errorMessage")
-                        Toast.makeText(this@CartActivity, "주문 실패: $errorMessage", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@CartActivity,
+                            "주문 실패: $errorMessage",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             } catch (e: Exception) {
@@ -144,16 +185,60 @@ class CartActivity : AppCompatActivity() {
                     }.toMutableList()
                     withContext(Dispatchers.Main) {
                         Log.d("CartActivity", "Cart items loaded: ${cartItems.size}")
-                        cartAdapter = CartAdapter(this@CartActivity, cartItems)
+                        cartAdapter = CartAdapter(this@CartActivity, cartItems) { position ->
+                            deleteCartItemDirect(position)
+                        }
                         recyclerView.adapter = cartAdapter
                         val payButton: Button = findViewById(R.id.paybutton)
-                        payButton.text = "카카오페이로 ${cart.total_price}원 결제하기" // Set the total price to payButton
+                        payButton.text =
+                            "카카오페이로 ${cart.total_price}원 결제하기" // Set the total price to payButton
                     }
                 } else {
-                    Log.e("CartActivity", "Failed to load cart items: ${response.errorBody()?.string()}")
+                    Log.e(
+                        "CartActivity",
+                        "Failed to load cart items: ${response.errorBody()?.string()}"
+                    )
                 }
             } catch (e: Exception) {
                 Log.e("CartActivity", "Error loading cart items: ${e.message}")
+            }
+        }
+    }
+
+    private fun deleteCartItemDirect(position: Int) {
+        AlertDialog.Builder(this)
+            .setTitle("삭제 확인")
+            .setMessage("이 항목을 장바구니에서 삭제하시겠습니까?")
+            .setPositiveButton("예") { _, _ ->
+                performDeletion(position)
+            }
+            .setNegativeButton("아니요", null)
+            .show()
+    }
+
+
+    private fun performDeletion(position: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = RetrofitClient.getInstance().create(CartApiService::class.java)
+                    .deleteItemFromCart("Bearer $accessToken", position + 1)
+
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        Log.d("CartActivity", "Item successfully deleted at position: $position")
+                        cartAdapter?.items?.removeAt(position)
+                        cartAdapter?.notifyItemRemoved(position)
+                    }
+                    else {
+                        val errorMessage = response.errorBody()?.string() ?: "Unknown error"
+                        Log.e("CartActivity", "Failed to delete item: $errorMessage")
+
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.e("CartActivity", "Error in deleting item: ${e.message}")
+                }
             }
         }
     }

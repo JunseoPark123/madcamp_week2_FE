@@ -26,3 +26,11 @@ data class OrderResponse(
     val message: String
 )
 
+data class Order(
+    val id: Int,
+    val user: Int,
+    val product_name: String,
+    val store_name: String,
+    val price: Int,
+    val created_at: String // String 타입으로 정의
+)
