@@ -7,12 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week2_fe.databinding.CartItemBinding
 import com.example.madcamp_week2_fe.home.CartItem // 이 부분의 패키지를 확인하세요
 
-class CartAdapter(private val context: Context, private val items: List<com.example.madcamp_week2_fe.home.CartItem>) :
+class CartAdapter(private val context: Context, val items: MutableList<CartItem>) :
     RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     class CartViewHolder(val binding: CartItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CartItem) {
             binding.menu.text = item.product_name
+            binding.storeName.text = item.store_name
             binding.price.text = "${item.price}원"
         }
     }
