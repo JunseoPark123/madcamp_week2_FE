@@ -13,6 +13,7 @@ data class Cart(
 )
 data class AddToCartRequest(
     val product_name: String,
+    val store_name: String?,
     val price: Int
 )
 
@@ -34,3 +35,4 @@ data class Order(
     val price: Int,
     val created_at: String // String 타입으로 정의
 )
+

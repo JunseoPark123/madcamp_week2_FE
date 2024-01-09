@@ -13,6 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_bold"
+        android:textSize="20dp"
         android:text="@string/breakfirst"
         android:textColor="#CC4D28"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,6 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/poppins_bold"
         android:text="건강한 한끼가 만드는"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notification"
         app:srcCompat="@drawable/redcircle" />
@@ -105,7 +107,7 @@
         android:id="@+id/locationinfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/poppins_bold"
         android:text="주소를 입력해주세요"
@@ -118,6 +120,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/redcircle"
         app:srcCompat="@drawable/mask" />
@@ -126,29 +131,20 @@
         android:id="@+id/request"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="40dp"
         android:fontFamily="@font/poppins_bold"
         android:text="Breakfirst에 입점 문의하기"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locationinfo" />
-
-    <TextView
-        android:id="@+id/requestintro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="BreakFirst에 입점하고 더 많은 수익을 창출해보세요!"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/request" />
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/mask"
+        app:layout_constraintEnd_toStartOf="@+id/redrightarrow"
+        app:layout_constraintStart_toStartOf="@+id/mask"
+        app:layout_constraintTop_toTopOf="@+id/mask" />
 
     <ImageView
         android:id="@+id/redrightarrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_width="24dp"
+        android:layout_height="16dp"
         android:layout_marginEnd="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/mask"
         app:layout_constraintEnd_toEndOf="@+id/mask"
         app:layout_constraintTop_toTopOf="@+id/mask"
         app:srcCompat="@drawable/redrightarrow" />
@@ -158,7 +154,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mask"
         app:srcCompat="@drawable/search2" />
@@ -169,64 +165,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_bold"
         android:text="도시락 이름을 검색해보세요."
         app:layout_constraintStart_toEndOf="@+id/searchmenu"
         app:layout_constraintTop_toBottomOf="@+id/mask" />
 
-    <ImageView
-        android:id="@+id/dibsblock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchmenu"
-        app:srcCompat="@drawable/rectangle_c" />
-
-    <TextView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/dipsbutton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/redbutton"
         android:fontFamily="@font/poppins_bold"
         android:text="찜한 가게"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchmenu" />
-
-    <ImageView
-        android:id="@+id/filterblock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mask"
-        app:srcCompat="@drawable/rectangle_c" />
-
-    <TextView
-        android:id="@+id/filter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="12dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="가격 낮은 순"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mask" />
 
 
     <GridView
         android:id="@+id/homeGridView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:horizontalSpacing="8dp"
         android:numColumns="2"
         android:padding="16dp"
-        android:scrollbars="vertical"
         android:verticalSpacing="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -2,6 +2,7 @@ package com.example.madcamp_week2_fe.home
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -45,6 +46,12 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        val enroll : ImageView = view.findViewById(R.id.redrightarrow)
+        enroll.setOnClickListener {
+            val enrollUrl = "http://ec2-3-34-151-36.ap-northeast-2.compute.amazonaws.com/store/add_store_menu/"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(enrollUrl))
+            startActivity(intent)
+        }
         val gridView: GridView = view.findViewById(R.id.homeGridView)
 
 

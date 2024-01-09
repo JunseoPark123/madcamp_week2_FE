@@ -1,9 +1,6 @@
 package com.example.madcamp_week2_fe.home
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.SharedPreferences
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,14 +11,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.madcamp_week2_fe.CartAdapter
 import com.example.madcamp_week2_fe.MainActivity
 import com.example.madcamp_week2_fe.R
 import com.example.madcamp_week2_fe.RetrofitClient
 import com.example.madcamp_week2_fe.interfaces.CartApiService
 import com.example.madcamp_week2_fe.models.AddToOrderRequest
-import com.example.madcamp_week2_fe.models.Cart
-import com.example.madcamp_week2_fe.ready.LoginRegisterActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -61,9 +55,9 @@ class CartActivity : AppCompatActivity() {
         val payButton: Button = findViewById(R.id.paybutton)
         payButton.setOnClickListener {
             showPayDialog()
-            val url = "http://ec2-3-34-151-36.ap-northeast-2.compute.amazonaws.com/kakaoPayLogic/"
-            var intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
+//            val url = "http://ec2-3-34-151-36.ap-northeast-2.compute.amazonaws.com/kakaoPayLogic/"
+//            var intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+//            startActivity(intent)
         }
     }
     private fun deleteAllCartItems() {

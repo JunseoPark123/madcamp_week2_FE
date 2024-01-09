@@ -84,7 +84,7 @@ class ItemInfoActivity : AppCompatActivity() {
                     val cartApi = RetrofitClient.getInstance().create(CartApiService::class.java)
                     val response = cartApi.addToCart(
                         "Bearer $accessToken",
-                        AddToCartRequest(productName, productPrice)
+                        AddToCartRequest(productName, storeName, productPrice)
                     )
 
                     withContext(Dispatchers.Main) {
