@@ -1,8 +1,10 @@
 package com.example.madcamp_week2_fe.home
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,42 +17,41 @@ import com.example.madcamp_week2_fe.R
 import com.example.madcamp_week2_fe.RetrofitClient
 import com.example.madcamp_week2_fe.interfaces.CartApiService
 import com.example.madcamp_week2_fe.models.Cart
+import com.example.madcamp_week2_fe.ready.LoginRegisterActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class CartActivity : AppCompatActivity() {
-
     private lateinit var recyclerView: RecyclerView
-    private var cartAdapter: CartAdapter? = null // lateinit 대신 nullable 타입으로 선언
+    private var cartAdapter: CartAdapter? = null
     private lateinit var accessToken: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
 
-        recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this) // 레이아웃 매니저 초기화
+        // SharedPreferences에서 accessToken을 불러옵니다.
+        val sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
+        accessToken = sharedPreferences.getString("access_token", "") ?: ""
+        var phoneNumber = sharedPreferences.getString("phone_number", "") ?: ""
 
-        accessToken = intent.getStringExtra("access_token") ?: ""
+        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         loadCartItems()
 
 
-
+        val phoneTextView: TextView = findViewById(R.id.phone)
+        phoneTextView.text = phoneNumber
 
         recyclerView.adapter = cartAdapter
 
         val btnBack: ImageView = findViewById(R.id.left_arrow)
         btnBack.setOnClickListener {
-            val source = intent.getStringExtra("source")
-            if (source == "ItemInfoActivity") {
-                startActivity(Intent(this, ItemInfoActivity::class.java))
-            }
-            else {
-                startActivity(Intent(this, MainActivity::class.java))
-            }
+            val intent = Intent(this@CartActivity, MainActivity::class.java)
+            startActivity(intent)
             finish()
         }
     }
@@ -65,25 +66,22 @@ class CartActivity : AppCompatActivity() {
                     val cartItems = cart.cart_items.map {
                         CartItem(
                             R.drawable.image1,
-                            it.price.toInt(), // Assuming price is compatible with Int
+                            it.price.toInt(),
                             it.product_name
                         )
                     }
                     withContext(Dispatchers.Main) {
+                        Log.d("CartActivity", "Cart items loaded: ${cartItems.size}")
                         cartAdapter = CartAdapter(this@CartActivity, cartItems)
                         recyclerView.adapter = cartAdapter
-
-                        // Accessing total_price from the Cart object
-                        val totalAmountTextView: Button = findViewById(R.id.paybutton)
-                        totalAmountTextView.text = "${cart.total_price}원 결제하기"
-
-                        // ... other UI updates
+                        val payButton: Button = findViewById(R.id.paybutton)
+                        payButton.text = "${cart.total_price}원 결제하기" // Set the total price to payButton
                     }
                 } else {
-                    // ... handle error case
+                    Log.e("CartActivity", "Failed to load cart items: ${response.errorBody()?.string()}")
                 }
             } catch (e: Exception) {
-                // ... handle exception case
+                Log.e("CartActivity", "Error loading cart items: ${e.message}")
             }
         }
     }

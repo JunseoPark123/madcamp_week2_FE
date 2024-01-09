@@ -1,38 +1,34 @@
 package com.example.madcamp_week2_fe.home
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.madcamp_week2_fe.MainActivity
 import com.example.madcamp_week2_fe.R
+import com.example.madcamp_week2_fe.RetrofitClient
+import com.example.madcamp_week2_fe.interfaces.CartApiService
+import com.example.madcamp_week2_fe.models.AddToCartRequest
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ItemInfoActivity : AppCompatActivity() {
-    private var accessToken: String? = null
+    private lateinit var sharedPrefs: SharedPreferences
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_info)
-        accessToken = intent.getStringExtra("access_token")
 
-        val btnBack: ImageView = findViewById(R.id.left_arrow)
-        btnBack.setOnClickListener {
-            val intent = Intent(this@ItemInfoActivity, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-
-        val btnCart: Button = findViewById(R.id.cart)
-        btnCart.setOnClickListener {
-            val intent = Intent(this@ItemInfoActivity, CartActivity::class.java).apply {
-                putExtra("source", "ItemInfoActivity")
-                putExtra("access_token", accessToken)
-            }
-            startActivity(intent)
-        }
+        sharedPrefs = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
+        val accessToken = sharedPrefs.getString("access_token", null)
 
         val itemImageView: ImageView = findViewById(R.id.itemImage)
         val itemName1TextView: TextView = findViewById(R.id.item)
@@ -60,7 +56,58 @@ class ItemInfoActivity : AppCompatActivity() {
             detailGram3TextView.text = it.getStringExtra("detailGram3")
             storeTextView.text = it.getStringExtra("store")
         }
-    }
 
+        val btnBack: ImageView = findViewById(R.id.left_arrow)
+        btnBack.setOnClickListener {
+            val intent = Intent(this@ItemInfoActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        val productName = intent.getStringExtra("menuName") ?: ""
+        val productPrice = intent.getIntExtra("price", 0)
+
+        val btnCart: Button = findViewById(R.id.cart)
+        btnCart.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val cartApi = RetrofitClient.getInstance().create(CartApiService::class.java)
+                    val response = cartApi.addToCart(
+                        "Bearer $accessToken",
+                        AddToCartRequest(productName, productPrice)
+                    )
+
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful) {
+                            // 성공 메시지 표시 및 다이얼로그 표시
+                            Toast.makeText(this@ItemInfoActivity, "장바구니에 추가되었습니다.", Toast.LENGTH_SHORT).show()
+                            showCartDialog()
+                        } else {
+                            // 실패 메시지 표시
+                            Toast.makeText(this@ItemInfoActivity, "추가 실패: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        // 오류 메시지 표시
+                        Toast.makeText(this@ItemInfoActivity, "오류가 발생했습니다: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+
+    }
+    private fun showCartDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("장바구니 추가")
+            .setMessage("장바구니에 추가되었습니다. 장바구니로 이동하시겠습니까?")
+            .setPositiveButton("예") { dialog, which ->
+                startActivity(Intent(this, CartActivity::class.java))
+            }
+            .setNegativeButton("아니요") { dialog, which ->
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+            .show()
+    }
 
 }

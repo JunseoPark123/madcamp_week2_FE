@@ -1,5 +1,6 @@
 package com.example.madcamp_week2_fe.home
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -24,7 +25,11 @@ class HomeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-        accessToken = arguments?.getString("access_token")
+
+        // Accessing SharedPreferences to get the access_token
+        val sharedPreferences = activity?.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        accessToken = sharedPreferences?.getString("access_token", null)
+        Log.d("MainActivity", "AccessToken retrieved: $accessToken")
 
         val location: ImageView = view.findViewById(R.id.location)
         location.setOnClickListener {
@@ -35,7 +40,7 @@ class HomeFragment : Fragment() {
         val cart: ImageView = view.findViewById(R.id.cart)
         cart.setOnClickListener {
             val intent = Intent(activity, CartActivity::class.java).apply {
-                putExtra("access_token", accessToken)
+                putExtra("access_token", accessToken) // Passing access_token to CartActivity
             }
             startActivity(intent)
         }

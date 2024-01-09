@@ -10,3 +10,7 @@ data class Cart(
     val cart_items: List<CartItem>,
     val total_price: Int
 )
+data class AddToCartRequest(
+    val product_name: String,
+    val price: Int
+)

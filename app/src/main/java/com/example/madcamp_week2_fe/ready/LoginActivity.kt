@@ -1,6 +1,7 @@
 package com.example.madcamp_week2_fe.ready
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +17,7 @@ import com.example.madcamp_week2_fe.R
 import com.example.madcamp_week2_fe.RetrofitClient
 import com.example.madcamp_week2_fe.interfaces.UserApiService
 import com.example.madcamp_week2_fe.models.LoginRequest
+import com.example.madcamp_week2_fe.models.LoginResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -77,33 +79,35 @@ class LoginActivity : AppCompatActivity() {
                     // 로그인 성공
                     val loginResponse = response.body()!!
                     withContext(Dispatchers.Main) {
-                        Log.d("LoginActivity", "Access Token: ${loginResponse.access_token}")
-                        val intent = Intent(this@LoginActivity,  MainActivity::class.java).apply {
-                        // 필요한 경우 loginResponse의 데이터를 Intent에 추가
-                            putExtra("access_token", loginResponse.access_token)
-                            putExtra("refresh_token", loginResponse.refresh_token)
-                            putExtra("email", loginResponse.email)
-                            putExtra("username", loginResponse.username)
-                            putExtra("phone_number", loginResponse.phone_number)
-                            putExtra("current_location", loginResponse.current_location)
-                    }
-                        startActivity(intent)
+                        saveLoginData(loginResponse)
+                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         finish()
                     }
                 } else {
                     // 로그인 실패
                     withContext(Dispatchers.Main) {
-                        // 적절한 사용자 피드백 구현
                         Toast.makeText(this@LoginActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
                     }
                 }
             } catch (e: Exception) {
                 // 네트워크 오류 또는 기타 예외 처리
                 withContext(Dispatchers.Main) {
-                    // 적절한 사용자 피드백 구현
                     Toast.makeText(this@LoginActivity, "로그인 실패: 네트워크 오류", Toast.LENGTH_SHORT).show()
                 }
             }
         }
+    }
+    private fun saveLoginData(loginResponse: LoginResponse) {
+        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        sharedPreferences.edit().apply {
+            putString("access_token", loginResponse.access_token)
+            putString("refresh_token", loginResponse.refresh_token)
+            putString("email", loginResponse.email)
+            putString("username", loginResponse.username)
+            putString("phone_number", loginResponse.phone_number)
+            putString("current_location", loginResponse.current_location)
+            apply()
+        }
+        Log.d("LoginActivity", "Login data saved: AccessToken: ${loginResponse.access_token}")
     }
 }

@@ -1,6 +1,8 @@
 package com.example.madcamp_week2_fe
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -17,14 +19,15 @@ public const val TAG_DIBS = "dibs_fragment"
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
-    var accessToken: String? = null
+    private var accessToken: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        accessToken = intent.getStringExtra("access_token")
+        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        accessToken = sharedPreferences.getString("access_token", null)
 
         setFragment(TAG_HOME, HomeFragment())
         binding.navigationView.selectedItemId = R.id.home
@@ -49,12 +52,7 @@ class MainActivity : AppCompatActivity() {
                 currentFragment
         } else {
             when (tag) {
-                TAG_HOME -> HomeFragment().apply {
-                    // HomeFragment에 엑세스 토큰을 번들로 전달합니다.
-                    arguments = Bundle().apply {
-                        putString("access_token", accessToken)
-                    }
-                }
+                TAG_HOME -> HomeFragment()
                 TAG_ORDERINFO -> OrderInfoFragment()
                 TAG_DIBS -> DibsFragment()
                 else -> HomeFragment()
