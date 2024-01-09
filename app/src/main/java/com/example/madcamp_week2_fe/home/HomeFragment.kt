@@ -30,12 +30,19 @@ class HomeFragment : Fragment() {
         // Accessing SharedPreferences to get the access_token
         val sharedPreferences = activity?.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         accessToken = sharedPreferences?.getString("access_token", null)
+
+
         Log.d("MainActivity", "AccessToken retrieved: $accessToken")
 
         val location: ImageView = view.findViewById(R.id.location)
         location.setOnClickListener {
             val intent = Intent(activity, LocationActivity::class.java)
             startActivity(intent)
+        }
+
+        val logout : ImageView = view.findViewById(R.id.logout)
+        logout.setOnClickListener{
+
         }
 
         val cart: ImageView = view.findViewById(R.id.cart)
