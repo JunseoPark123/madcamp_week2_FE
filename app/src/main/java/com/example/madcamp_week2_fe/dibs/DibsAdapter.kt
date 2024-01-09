@@ -1,17 +1,18 @@
-package com.example.madcamp_week2_fe.dibs;
+package com.example.madcamp_week2_fe.dibs
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madcamp_week2_fe.R
 
-class DibsAdapter : RecyclerView.Adapter<DibsAdapter.DibsViewHolder>() {
-
-    private val itemCount = 10 // 표시할 아이템 개수
+class DibsAdapter(private val items: List<DibsItem>) : RecyclerView.Adapter<DibsAdapter.DibsViewHolder>() {
 
     class DibsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        // 뷰 홀더 초기화. 여기에서 dibs_item.xml의 뷰를 바인딩합니다.
+        val storeNameTextView: TextView = view.findViewById(R.id.storeName)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DibsViewHolder {
@@ -20,11 +21,12 @@ class DibsAdapter : RecyclerView.Adapter<DibsAdapter.DibsViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: DibsViewHolder, position: Int) {
-        // 여기에서 각 아이템 뷰에 데이터를 바인딩합니다.
-        // 데이터가 필요 없으므로, 이 부분은 비워둡니다.
+        val item = items[position]
+        holder.storeNameTextView.text = item.storeName
+
     }
 
     override fun getItemCount(): Int {
-        return itemCount
+        return items.size
     }
 }

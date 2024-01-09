@@ -1,4 +1,3 @@
 package com.example.madcamp_week2_fe.dibs
 
-class DibsItem {
-}
+data class DibsItem(val storeName: String, var favoriteStatus: Int)

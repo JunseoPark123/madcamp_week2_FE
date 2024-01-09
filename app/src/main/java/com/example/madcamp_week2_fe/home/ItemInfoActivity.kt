@@ -29,6 +29,7 @@ class ItemInfoActivity : AppCompatActivity() {
 
         sharedPrefs = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
         val accessToken = sharedPrefs.getString("access_token", null)
+        val storeName = intent.getStringExtra("store")
 
         val itemImageView: ImageView = findViewById(R.id.itemImage)
         val itemName1TextView: TextView = findViewById(R.id.item)
@@ -55,6 +56,15 @@ class ItemInfoActivity : AppCompatActivity() {
             detailName3TextView.text = it.getStringExtra("detailName3")
             detailGram3TextView.text = it.getStringExtra("detailGram3")
             storeTextView.text = it.getStringExtra("store")
+        }
+
+        val btnHeart: ImageView = findViewById(R.id.heart)
+        btnHeart.setOnClickListener {
+            if (storeName != null && accessToken != null) {
+                toggleFavorite(storeName, accessToken)
+            } else {
+                Toast.makeText(this, "오류: 가게 이름 또는 접근 토큰이 없습니다", Toast.LENGTH_SHORT).show()
+            }
         }
 
         val btnBack: ImageView = findViewById(R.id.left_arrow)
@@ -97,6 +107,31 @@ class ItemInfoActivity : AppCompatActivity() {
         }
 
     }
+
+    private fun toggleFavorite(storeName: String, accessToken: String)  {
+        val currentStatus = getFavoriteStatus(storeName)
+        val newStatus = if (currentStatus == 0) 1 else 0
+        saveFavoriteStatus(storeName, newStatus)
+
+        // 업데이트된 즐겨찾기 상태에 따라 아이콘 변경
+        findViewById<ImageView>(R.id.heart).setImageResource(
+            if (newStatus == 1) R.drawable.redheart
+            else R.drawable.heart
+        )
+    }
+
+    private fun getFavoriteStatus(storeName: String): Int {
+        val accessToken = sharedPrefs.getString("access_token", null)
+        return sharedPrefs.getInt("$accessToken-$storeName", 0)
+    }
+
+    private fun saveFavoriteStatus(storeName: String, status: Int) {
+        val accessToken = sharedPrefs.getString("access_token", null)
+        sharedPrefs.edit().putInt("$accessToken-$storeName", status).apply()
+    }
+
+
+
     private fun showCartDialog() {
         AlertDialog.Builder(this)
             .setTitle("장바구니 추가")
