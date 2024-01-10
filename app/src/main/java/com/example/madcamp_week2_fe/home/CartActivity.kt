@@ -56,9 +56,6 @@ class CartActivity : AppCompatActivity() {
         val payButton: Button = findViewById(R.id.paybutton)
         payButton.setOnClickListener {
             showPayDialog()
-            val url = "http://ec2-3-34-151-36.ap-northeast-2.compute.amazonaws.com/kakaoPayLogic/"
-            var intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
         }
     }
     private fun deleteAllCartItems() {
@@ -107,7 +104,9 @@ class CartActivity : AppCompatActivity() {
     }
 
     private fun processPayment() {
-
+        val url = "http://ec2-3-34-151-36.ap-northeast-2.compute.amazonaws.com/kakaoPayLogic/"
+        var intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
         processOrders()
         deleteAllCartItems()
         clearCartItems()
