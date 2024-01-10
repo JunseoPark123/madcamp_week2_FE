@@ -29,7 +29,16 @@ class OrderInfoAdapter(
 
     class OrderInfoViewHolder(val binding: OrderinfoItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(orderInfo: OrderInfo) {
-            binding.profileImage.setImageResource(orderInfo.imageResourceId)
+            // 상품 이름에 따라 이미지를 설정합니다.
+            val imageResId = when (orderInfo.product_name) {
+                "비타민 과일 박스 세트" -> R.drawable.image1
+                "매콤달콤 진미채 박스" -> R.drawable.image2
+                "명절 반찬 박스 세트" -> R.drawable.image3
+                "영양소 상큼 과일 세트" -> R.drawable.image4
+                "채소 세트" -> R.drawable.image5
+                else -> R.drawable.image6
+            }
+            binding.profileImage.setImageResource(imageResId)
             binding.menu.text = orderInfo.product_name
             binding.store.text = orderInfo.store_name
             binding.price.text = "${orderInfo.price}원"
