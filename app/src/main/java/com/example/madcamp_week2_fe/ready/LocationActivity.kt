@@ -107,7 +107,7 @@ internal class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
             snippet("김병호, 김삼열 IT 융합센터(N1)")
         }
 
-        googleMap.mapType = GoogleMap.MAP_TYPE_SATELLITE  // 지도 유형 설정
+        googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL  // 지도 유형 설정
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(positionLatLng, 15f))  // 카메라 이동
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(15f))  // 줌의 정도 - 1 일 경우 세계지도 수준, 숫자가 커질 수록 상세지도가 표시됨
         return googleMap.addMarker(markerOption)
