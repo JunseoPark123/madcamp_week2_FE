@@ -23,7 +23,6 @@ internal class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
 
     companion object {
         const val TAG = "LocationActivity"
-        const val LOCATION_PERMISSION_REQUEST_CODE = 123
     }
 
     lateinit var binding: ActivityMapBinding
@@ -31,7 +30,6 @@ internal class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mapView: MapView
     private lateinit var googleMap: GoogleMap
     private var currentMarker: Marker? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,72 +42,19 @@ internal class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this@LocationActivity)
 
-        //위치 권한을 확인하고 업데이트를 시작
-        requestLocationPermission()
+    }
 
-    }
-    private fun requestLocationPermission() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                LOCATION_PERMISSION_REQUEST_CODE
-            )
-        } else {
-            // 권한이 이미 허용된 경우 위치 업데이트를 시작할 수 있음
-            startLocationUpdates()
+
+    private fun addMyLocation() {
+        val myLocation = LocationEntity(5, "김병호, 김삼열 IT 융합센터 (N1)", 36.374165, 127.365831)
+        val positionLatLng = LatLng(myLocation.latitude, myLocation.longitude)
+        val markerOption = MarkerOptions().apply {
+            position(positionLatLng)
+            title(myLocation.name)
         }
-    }
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        when (requestCode) {
-            LOCATION_PERMISSION_REQUEST_CODE -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // 권한 허용됨
-                    startLocationUpdates()
-                } else {
-                    // 권한 거부됨
-                    Toast.makeText(
-                        this,
-                        "앱을 사용하려면 위치 권한이 필요합니다.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
-    private fun startLocationUpdates() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            // 권한이 허용된 경우 위치 업데이트를 시작합니다.
-            val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-            fusedLocationClient.lastLocation
-                .addOnSuccessListener { location: Location? ->
-                    location?.let {
-                        val currentLatLng = LatLng(it.latitude, it.longitude)
-                        currentMarker = setupMarker(LatLngEntity(it.latitude, it.longitude))
-                        currentMarker?.showInfoWindow()
-                        moveCameraToLocation(currentLatLng)
-                    }
-                }
-        } else {
-            // 권한이 거부된 경우, 다시 권한을 요청하거나 사용자에게 메시지를 표시할 수 있습니다.
-            requestLocationPermission()
-        }
-    }
-    private fun moveCameraToLocation(latLng: LatLng) {
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+
+        googleMap.addMarker(markerOption)
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(positionLatLng, 15f))
     }
 
     /**
@@ -120,11 +65,11 @@ internal class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         this.googleMap = googleMap
 
-        // 현재 위치 업데이트를 시작
-        startLocationUpdates()
-
         // 고정 위치 표시
         addFixedLocations()
+
+        currentMarker = setupMarker(LatLngEntity(36.374165,127.365831))  // default N1
+        currentMarker?.showInfoWindow()
     }
 
     private fun addFixedLocations() {
@@ -159,9 +104,10 @@ internal class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
         val markerOption = MarkerOptions().apply {
             position(positionLatLng)
             title("내 위치")
+            snippet("김병호, 김삼열 IT 융합센터(N1)")
         }
 
-        googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL  // 지도 유형 설정
+        googleMap.mapType = GoogleMap.MAP_TYPE_SATELLITE  // 지도 유형 설정
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(positionLatLng, 15f))  // 카메라 이동
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(15f))  // 줌의 정도 - 1 일 경우 세계지도 수준, 숫자가 커질 수록 상세지도가 표시됨
         return googleMap.addMarker(markerOption)
