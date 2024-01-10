@@ -25,37 +25,43 @@
                 android:id="@+id/store"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/poppins_extrabold"
                 android:gravity="start"
                 android:padding="8dp"
                 android:text="store"
                 android:textColor="#8C8C8C"
-                android:textSize="10sp"
-                app:layout_constraintTop_toBottomOf="@+id/image"
-                tools:layout_editor_absoluteX="4dp" />
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image" />
 
             <TextView
                 android:id="@+id/menuName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:fontFamily="@font/poppins_extrabold"
                 android:gravity="start"
                 android:padding="8dp"
                 android:text="menu"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintTop_toBottomOf="@+id/store"
-                tools:layout_editor_absoluteX="4dp" />
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/store" />
 
             <TextView
                 android:id="@+id/detail1"
                 android:layout_width="wrap_content"
                 android:layout_height="26dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
                 android:background="@drawable/rectangle_c"
-                android:text="detail1"
                 android:fontFamily="@font/inter_black"
-                android:textColor="#8C8C8C"
                 android:gravity="center"
+                android:text="detail1"
+                android:textSize="12sp"
+                android:textColor="#8C8C8C"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/menuName" />
 
@@ -64,36 +70,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
                 android:background="@drawable/rectangle_c"
+                android:fontFamily="@font/inter_black"
                 android:gravity="center"
                 android:text="detail2"
-                android:fontFamily="@font/inter_black"
+                android:textSize="12sp"
                 android:textColor="#8C8C8C"
                 app:layout_constraintStart_toEndOf="@+id/detail1"
                 app:layout_constraintTop_toBottomOf="@+id/menuName" />
 
             <TextView
-                android:id="@+id/detail3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/rectangle_c"
-                android:text="detail3"
-                android:fontFamily="@font/inter_black"
-                android:textColor="#8C8C8C"
-                android:gravity="center"
-                app:layout_constraintStart_toEndOf="@+id/detail2"
-                app:layout_constraintTop_toBottomOf="@+id/menuName" />
-
-            <TextView
                 android:id="@+id/price"
-                android:fontFamily="@font/poppins_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
+                android:fontFamily="@font/poppins_bold"
                 android:text="price"
-                android:textSize="14sp"
                 android:textColor="@color/black"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detail1" />

@@ -46,6 +46,11 @@ class OrderInfoFragment : Fragment() {
 
         loadOrderInfo()
 
+        val leftArrow: ImageView = view.findViewById(R.id.left_arrow)
+        leftArrow.setOnClickListener {
+            (activity as? MainActivity)?.navigateToFragment(TAG_HOME)
+        }
+
         return view
     }
 

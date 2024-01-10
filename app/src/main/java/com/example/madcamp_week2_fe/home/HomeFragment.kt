@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.GridView
 import android.widget.ImageView
 import android.widget.TextView
@@ -28,6 +29,7 @@ class HomeFragment : Fragment() {
     private var items: MutableList<HomeGridItem> = mutableListOf()
     private var accessToken: String? = null
     private var allItems: MutableList<HomeGridItem> = mutableListOf()
+    private lateinit var gridView: GridView
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -39,7 +41,7 @@ class HomeFragment : Fragment() {
         val locationInfo = sharedPreferences?.getString("location_info", "기본 위치") // 기본값 설정
 
         val locationInfoTextView: TextView = view.findViewById(R.id.locationinfo)
-        locationInfoTextView.text = locationInfo
+        locationInfoTextView.text = locationInfo ?: "기본 위치"
 
 
         Log.d("MainActivity", "AccessToken retrieved: $accessToken")
@@ -50,10 +52,6 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-        val logout : ImageView = view.findViewById(R.id.logout)
-        logout.setOnClickListener{
-            logoutUser()
-        }
 
         val cart: ImageView = view.findViewById(R.id.cart)
         cart.setOnClickListener {
@@ -71,18 +69,18 @@ class HomeFragment : Fragment() {
         }
 
 
-        val nameSearch: TextView = view.findViewById(R.id.namesearch)
+        val nameSearch: EditText = view.findViewById(R.id.namesearch)
         nameSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
- //               filterItems(s.toString())
+                filterItems(s.toString())
             }
 
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        val gridView: GridView = view.findViewById(R.id.homeGridView)
+        gridView = view.findViewById(R.id.homeGridView)
 
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -106,10 +104,11 @@ class HomeFragment : Fragment() {
 
                 }
                 withContext(Dispatchers.Main) {
+                    allItems.clear()
+                    allItems.addAll(newItems) // allItems 초기화
                     items.clear()
-                    items.addAll(newItems)
-                    Log.d("HomeFragment", "아이템 설정 완료, 아이템 수: ${items.size}")
-                    gridView.adapter = HomeGridAdapter(requireContext(), items)
+                    items.addAll(newItems) // items 초기화
+                    gridView.adapter = HomeGridAdapter(requireContext(), items) // 어댑터 초기화
                 }
             } catch (e: Exception) {
                 Log.e("HomeFragment", "API 호출 실패", e)
@@ -142,21 +141,20 @@ class HomeFragment : Fragment() {
 
 
 
-    private fun logoutUser() {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val response = RetrofitClient.getInstance().create(UserApiService::class.java).logoutUser()
-                if (response.isSuccessful) {
-                    Log.d("HomeFragment", "Logout successful")
-                    navigateToLoginActivity()
-                } else {
-                    Log.e("HomeFragment", "Failed to logout: ${response.errorBody()?.string()}")
-                }
-            } catch (e: Exception) {
-                Log.e("HomeFragment", "Error in logout: ${e.message}")
-            }
+    private fun filterItems(searchQuery: String) {
+        val filteredList = allItems.filter {
+            it.store?.contains(searchQuery, ignoreCase = true) == true ||
+                    it.menuName?.contains(searchQuery, ignoreCase = true) == true ||
+                    it.detailName1?.contains(searchQuery, ignoreCase = true) == true ||
+                    it.detailName2?.contains(searchQuery, ignoreCase = true) == true
         }
+        items.clear()
+        items.addAll(filteredList)
+        val adapter = HomeGridAdapter(requireContext(), items)
+        gridView.adapter = adapter
+        adapter.notifyDataSetChanged()
     }
+
 
     private fun navigateToLoginActivity() {
         val intent = Intent(activity, LoginActivity::class.java)

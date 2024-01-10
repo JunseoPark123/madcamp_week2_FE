@@ -54,16 +54,6 @@
         app:layout_constraintTop_toBottomOf="@+id/Intro1" />
 
     <ImageView
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintEnd_toStartOf="@+id/cart"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logout" />
-
-    <ImageView
         android:id="@+id/cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,9 +68,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logout"
+        app:layout_constraintTop_toBottomOf="@+id/cart"
         app:srcCompat="@drawable/redcircle" />
 
     <ImageView
@@ -98,17 +88,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Intro2"
-        app:srcCompat="@drawable/location" />
+        app:srcCompat="@drawable/redlocation" />
 
     <TextView
         android:id="@+id/locationinfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/poppins_bold"
         android:text="주소를 입력해주세요"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +109,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.461"
@@ -149,25 +139,26 @@
         app:layout_constraintTop_toTopOf="@+id/mask"
         app:srcCompat="@drawable/redrightarrow" />
 
+
     <ImageView
         android:id="@+id/searchmenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mask"
         app:srcCompat="@drawable/search2" />
 
-
-    <TextView
+    <EditText
         android:id="@+id/namesearch"
+        android:textSize="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="도시락 이름을 검색해보세요."
+        android:hint="도시락 이름을 검색해보세요."
         app:layout_constraintStart_toEndOf="@+id/searchmenu"
         app:layout_constraintTop_toBottomOf="@+id/mask" />
 

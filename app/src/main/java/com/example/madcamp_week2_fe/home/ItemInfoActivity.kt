@@ -33,7 +33,6 @@ class ItemInfoActivity : AppCompatActivity() {
 
         val itemImageView: ImageView = findViewById(R.id.itemImage)
         val itemName1TextView: TextView = findViewById(R.id.item)
-        val itemName2TextView: TextView = findViewById(R.id.item2)
         val itemPriceTextView: TextView = findViewById(R.id.price)
         val detailName1TextView: TextView = findViewById(R.id.detailName1)
         val detailGram1TextView: TextView = findViewById(R.id.detailGram1)
@@ -42,12 +41,10 @@ class ItemInfoActivity : AppCompatActivity() {
         val detailName3TextView: TextView = findViewById(R.id.detailName3)
         val detailGram3TextView: TextView = findViewById(R.id.detailGram3)
         val storeTextView: TextView = findViewById(R.id.store)
-
         itemImageView.setImageResource(R.drawable.image1)
 
         intent?.let { it ->
             itemName1TextView.text = it.getStringExtra("menuName")
-            itemName2TextView.text = it.getStringExtra("menuName")
             itemPriceTextView.text = "${it.getIntExtra("price", 0)}원"
             detailName1TextView.text = it.getStringExtra("detailName1")
             detailGram1TextView.text = it.getStringExtra("detailGram1")

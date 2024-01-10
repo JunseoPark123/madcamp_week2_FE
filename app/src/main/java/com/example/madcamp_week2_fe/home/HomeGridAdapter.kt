@@ -27,7 +27,6 @@ class HomeGridAdapter(private val context: Context, private val items: List<Home
         val menuName = view.findViewById<TextView>(R.id.menuName)
         val detail1 = view.findViewById<TextView>(R.id.detail1)
         val detail2 = view.findViewById<TextView>(R.id.detail2)
-        val detail3 = view.findViewById<TextView>(R.id.detail3)
         val price = view.findViewById<TextView>(R.id.price)
         val amount = view.findViewById<TextView>(R.id.amount)
 
@@ -36,11 +35,15 @@ class HomeGridAdapter(private val context: Context, private val items: List<Home
         menuName.text = item.menuName
         detail1.text = item.detailName1
         detail2.text = item.detailName2
-        detail3.text = item.detailName3
         price.text = "${item.price}원"
         amount.text = "${item.amount}개"
 
 
         return view
+    }
+
+    override fun notifyDataSetChanged() {
+        // 여기에 필요한 추가 로직을 구현할 수 있습니다.
+        super.notifyDataSetChanged() // 상위 클래스의 notifyDataSetChanged 호출
     }
 }
