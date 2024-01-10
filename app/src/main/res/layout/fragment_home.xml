@@ -123,11 +123,29 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
         android:text="Breakfirst에 입점 문의하기"
+        android:textColor="@color/maintext"
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/mask"
         app:layout_constraintEnd_toStartOf="@+id/redrightarrow"
+        app:layout_constraintHorizontal_bias="0.246"
         app:layout_constraintStart_toStartOf="@+id/mask"
-        app:layout_constraintTop_toTopOf="@+id/mask" />
+        app:layout_constraintTop_toTopOf="@+id/mask"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <TextView
+        android:id="@+id/request_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Breakfirst에 입점하고 더 많은 수익 창출해보세요!"
+        android:textColor="@color/gray"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/mask"
+        app:layout_constraintEnd_toStartOf="@+id/redrightarrow"
+        app:layout_constraintHorizontal_bias="0.285"
+        app:layout_constraintStart_toStartOf="@+id/mask"
+        app:layout_constraintTop_toTopOf="@+id/mask"
+        app:layout_constraintVertical_bias="0.808" />
 
     <ImageView
         android:id="@+id/redrightarrow"
@@ -178,6 +196,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/namesearch"
         app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="31dp"
+        android:layout_height="29dp"
+        app:srcCompat="@drawable/home_location"
+        tools:layout_editor_absoluteX="322dp"
+        tools:layout_editor_absoluteY="13dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
