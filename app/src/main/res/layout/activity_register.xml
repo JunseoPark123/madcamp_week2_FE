@@ -8,6 +8,18 @@
     tools:context=".ready.LoginActivity">
 
     <ImageView
+        android:id="@+id/line4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/location_image"
+        app:srcCompat="@drawable/line_1" />
+
+    <ImageView
         android:id="@+id/left_arrow"
         android:layout_width="29dp"
         android:layout_height="19dp"
@@ -161,6 +173,16 @@
         app:srcCompat="@drawable/phone" />
 
     <ImageView
+        android:id="@+id/location_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line2"
+        app:srcCompat="@drawable/location" />
+
+    <ImageView
         android:id="@+id/line2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -172,6 +194,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phone_image"
         app:srcCompat="@drawable/line_1" />
+
 
     <ImageView
         android:id="@+id/line8"
@@ -198,20 +221,33 @@
         app:layout_constraintStart_toEndOf="@+id/phone_image"
         app:layout_constraintTop_toBottomOf="@+id/line8" />
 
+
+    <EditText
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="32dp"
+        android:background="@null"
+        android:hint="Location"
+        android:textSize="14dp"
+        app:layout_constraintStart_toEndOf="@+id/location_image"
+        app:layout_constraintTop_toBottomOf="@+id/line2" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginBottom="80dp"
         android:background="@drawable/rectangle_3"
         android:enabled="false"
         android:fontFamily="@font/inter_black"
         android:text="Next"
         android:textColor="#ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line2" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

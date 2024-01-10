@@ -1,6 +1,7 @@
 package com.example.madcamp_week2_fe.ready
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,6 +25,7 @@ import kotlinx.coroutines.withContext
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var userApiService: UserApiService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -40,6 +42,7 @@ class RegisterActivity : AppCompatActivity() {
         val email: EditText = findViewById(R.id.email)
         val name: EditText = findViewById(R.id.name)
         val phone: EditText = findViewById(R.id.phone)
+        val location : EditText = findViewById(R.id.location)
 
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -49,7 +52,7 @@ class RegisterActivity : AppCompatActivity() {
             @SuppressLint("ResourceAsColor")
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 // 네 EditText에 모두 텍스트가 있는지 확인합니다. 변경 후 텍스트, 변경 시작 위치, 변경 되기 전 길이, 새로 추가되거나 변경된 문자의 수
-                registerButton.isEnabled = email.text.trim().isNotEmpty() && password.text.trim().isNotEmpty() && name.text.trim().isNotEmpty() && phone.text.trim().isNotEmpty()
+                registerButton.isEnabled = email.text.trim().isNotEmpty() && password.text.trim().isNotEmpty() && name.text.trim().isNotEmpty() && phone.text.trim().isNotEmpty() && location.text.trim().isNotEmpty()
 
             }
             override fun afterTextChanged(s: Editable?) {
@@ -61,10 +64,11 @@ class RegisterActivity : AppCompatActivity() {
         password.addTextChangedListener(textWatcher)
         name.addTextChangedListener(textWatcher)
         phone.addTextChangedListener(textWatcher)
+        location.addTextChangedListener(textWatcher)
         userApiService = RetrofitClient.getInstance().create(UserApiService::class.java)
 
         registerButton.setOnClickListener {
-            val registerRequest = RegisterRequest(email.text.toString(), name.text.toString(), password.text.toString(), phone.text.toString(), null)
+            val registerRequest = RegisterRequest(email.text.toString(), name.text.toString(), password.text.toString(), phone.text.toString(), location.text.toString())
             registerUser(registerRequest)
         }
     }
@@ -78,6 +82,12 @@ class RegisterActivity : AppCompatActivity() {
                     // 회원가입 성공
                     val registerResponse = response.body()!!
                     withContext(Dispatchers.Main) {
+                        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+                        sharedPreferences.edit().apply {
+                            val location : EditText = findViewById(R.id.location)
+                            putString("location_info", location.text.toString())
+                            apply()
+                        }
                         Toast.makeText(this@RegisterActivity, "회원가입 성공", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
                         finish()

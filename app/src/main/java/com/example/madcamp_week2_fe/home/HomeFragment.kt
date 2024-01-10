@@ -4,12 +4,15 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.madcamp_week2_fe.ready.LocationActivity
 import com.example.madcamp_week2_fe.R
@@ -24,6 +27,7 @@ class HomeFragment : Fragment() {
     private val storeApi: StoreApiService = RetrofitClient.getInstance().create(StoreApiService::class.java)
     private var items: MutableList<HomeGridItem> = mutableListOf()
     private var accessToken: String? = null
+    private var allItems: MutableList<HomeGridItem> = mutableListOf()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -32,6 +36,10 @@ class HomeFragment : Fragment() {
         // Accessing SharedPreferences to get the access_token
         val sharedPreferences = activity?.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         accessToken = sharedPreferences?.getString("access_token", null)
+        val locationInfo = sharedPreferences?.getString("location_info", "기본 위치") // 기본값 설정
+
+        val locationInfoTextView: TextView = view.findViewById(R.id.locationinfo)
+        locationInfoTextView.text = locationInfo
 
 
         Log.d("MainActivity", "AccessToken retrieved: $accessToken")
@@ -61,6 +69,19 @@ class HomeFragment : Fragment() {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(enrollUrl))
             startActivity(intent)
         }
+
+
+        val nameSearch: TextView = view.findViewById(R.id.namesearch)
+        nameSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+ //               filterItems(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         val gridView: GridView = view.findViewById(R.id.homeGridView)
 
 
@@ -118,6 +139,8 @@ class HomeFragment : Fragment() {
 
         return view
     }
+
+
 
     private fun logoutUser() {
         CoroutineScope(Dispatchers.IO).launch {
