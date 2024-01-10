@@ -128,7 +128,7 @@ class ItemInfoActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     if (response.isSuccessful) {
                         val averageRating = response.body()?.average_rating ?: 0f
-                        textView.text = "별점: ${String.format("%.1f", averageRating)}"
+                        textView.text = "${String.format("%.1f", averageRating)}"
                     }
                 }
             } catch (e: Exception) {
