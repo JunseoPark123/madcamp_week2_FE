@@ -29,7 +29,8 @@ class ItemInfoActivity : AppCompatActivity() {
 
         sharedPrefs = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
         val accessToken = sharedPrefs.getString("access_token", null)
-        val storeName = intent.getStringExtra("store")
+        val storeName = intent.getStringExtra("store") ?: ""
+        initializeFavoriteIcon(storeName)
 
         val itemImageView: ImageView = findViewById(R.id.itemImage)
         val itemName1TextView: TextView = findViewById(R.id.item)
@@ -55,7 +56,7 @@ class ItemInfoActivity : AppCompatActivity() {
             storeTextView.text = it.getStringExtra("store")
         }
 
-        val btnHeart: ImageView = findViewById(R.id.heart)
+        val btnHeart: ImageView = findViewById(R.id.favor)
         btnHeart.setOnClickListener {
             if (storeName != null && accessToken != null) {
                 toggleFavorite(storeName, accessToken)
@@ -105,13 +106,22 @@ class ItemInfoActivity : AppCompatActivity() {
 
     }
 
+    private fun initializeFavoriteIcon(storeName: String) {
+        val currentStatus = getFavoriteStatus(storeName)
+        findViewById<ImageView>(R.id.favor).setImageResource(
+            if (currentStatus == 1) R.drawable.redheart
+            else R.drawable.heart
+        )
+    }
+
+
     private fun toggleFavorite(storeName: String, accessToken: String)  {
         val currentStatus = getFavoriteStatus(storeName)
         val newStatus = if (currentStatus == 0) 1 else 0
         saveFavoriteStatus(storeName, newStatus)
 
         // 업데이트된 즐겨찾기 상태에 따라 아이콘 변경
-        findViewById<ImageView>(R.id.heart).setImageResource(
+        findViewById<ImageView>(R.id.favor).setImageResource(
             if (newStatus == 1) R.drawable.redheart
             else R.drawable.heart
         )

@@ -65,7 +65,7 @@
 
 
     <ImageView
-        android:id="@+id/heart"
+        android:id="@+id/favor"
         android:layout_width="15dp"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
