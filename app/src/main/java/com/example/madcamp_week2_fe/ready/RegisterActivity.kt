@@ -89,7 +89,7 @@ class RegisterActivity : AppCompatActivity() {
                             apply()
                         }
                         Toast.makeText(this@RegisterActivity, "회원가입 성공", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+                        startActivity(Intent(this@RegisterActivity, RegisterFinishActivity::class.java))
                         finish()
                     }
                 } else {

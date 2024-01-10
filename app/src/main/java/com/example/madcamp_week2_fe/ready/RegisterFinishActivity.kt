@@ -17,14 +17,14 @@ class RegisterFinishActivity : AppCompatActivity() {
 
         mainButton.setOnClickListener {
             // 로그인 버튼 클릭시 로그인 관련 함수 실행
-            val intent = Intent(this@RegisterFinishActivity, MainActivity::class.java)
+            val intent = Intent(this@RegisterFinishActivity, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }
 
         val btnBack: ImageView = findViewById(R.id.left_arrow)
         btnBack.setOnClickListener {
-            val intent = Intent(this@RegisterFinishActivity, LocationActivity::class.java)
+            val intent = Intent(this@RegisterFinishActivity, RegisterActivity::class.java)
             startActivity(intent)
             finish()
         }

@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
 
         Log.d("MainActivity", "AccessToken retrieved: $accessToken")
 
-        val location: ImageView = view.findViewById(R.id.location)
+        val location: ImageView = view.findViewById(R.id.location2)
         location.setOnClickListener {
             val intent = Intent(activity, LocationActivity::class.java)
             startActivity(intent)
