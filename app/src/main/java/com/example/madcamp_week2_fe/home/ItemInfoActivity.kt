@@ -34,6 +34,7 @@ class ItemInfoActivity : AppCompatActivity() {
         val accessToken = sharedPrefs.getString("access_token", null)
         val storeName = intent.getStringExtra("store") ?: ""
         val ratingTextView: TextView = findViewById(R.id.rate)
+        val itemName = intent.getStringExtra("menuName") ?: ""
         initializeFavoriteIcon(storeName)
 
         val itemImageView: ImageView = findViewById(R.id.itemImage)
@@ -46,7 +47,16 @@ class ItemInfoActivity : AppCompatActivity() {
         val detailName3TextView: TextView = findViewById(R.id.detailName3)
         val detailGram3TextView: TextView = findViewById(R.id.detailGram3)
         val storeTextView: TextView = findViewById(R.id.store)
-        itemImageView.setImageResource(R.drawable.image1)
+        val imageResource = when (itemName) {
+            "비타민 과일 박스 세트" -> R.drawable.image1
+            "매콤달콤 진미채 박스" -> R.drawable.image2
+            "명절 반찬 박스 세트" -> R.drawable.image3
+            "영양소 상큼 과일 세트" -> R.drawable.image4
+            "채소 세트" -> R.drawable.image5
+            else -> R.drawable.image6
+        }
+
+        itemImageView.setImageResource(imageResource)
 
         intent?.let { it ->
             itemName1TextView.text = it.getStringExtra("menuName")

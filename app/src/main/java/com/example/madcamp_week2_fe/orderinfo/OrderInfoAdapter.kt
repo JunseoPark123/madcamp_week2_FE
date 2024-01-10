@@ -61,28 +61,12 @@ class OrderInfoAdapter(
         }
 
         // 평균 별점을 가져오고 화면에 표시합니다.
-        getAverageRating(orderInfo.store_name, holder.binding.rate, holder.itemView.context)
     }
 
 
 
 
-    private fun getAverageRating(storeName: String, textView: TextView, context: Context) {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val starApi = RetrofitClient.getInstance().create(StarApiService::class.java)
-                val response = starApi.getAverageRating(AverageRatingRequest(storeName))
-                withContext(Dispatchers.Main) {
-                    if (response.isSuccessful) {
-                        val averageRating = response.body()?.average_rating ?: 0f
-                        textView.text = "별점: ${String.format("%.1f", averageRating)}"
-                    }
-                }
-            } catch (e: Exception) {
-                Log.e("OrderInfoAdapter", "평균 별점 조회 실패: ${e.message}")
-            }
-        }
-    }
+
 
     override fun getItemCount() = orderList.size
 }

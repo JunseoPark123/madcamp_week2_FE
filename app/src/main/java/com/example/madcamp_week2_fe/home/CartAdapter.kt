@@ -12,7 +12,15 @@ class CartAdapter(private val context: Context, val items: MutableList<CartItem>
 
     class CartViewHolder(val binding: CartItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CartItem) {
-            binding.image.setImageResource(R.drawable.image1)
+            val imageResId = when (item.product_name) {
+                "비타민 과일 박스 세트" -> R.drawable.image1
+                "매콤달콤 진미채 박스" -> R.drawable.image2
+                "명절 반찬 박스 세트" -> R.drawable.image3
+                "영양소 상큼 과일 세트" -> R.drawable.image4
+                "채소 세트" -> R.drawable.image5
+                else -> R.drawable.image6
+            }
+            binding.image.setImageResource(imageResId)
             binding.menu.text = item.product_name
             binding.storeName.text = item.store_name
             binding.price.text = "${item.price}원"

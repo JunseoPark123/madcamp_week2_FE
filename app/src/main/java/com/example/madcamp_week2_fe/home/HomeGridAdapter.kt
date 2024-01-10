@@ -29,8 +29,16 @@ class HomeGridAdapter(private val context: Context, private val items: List<Home
         val detail2 = view.findViewById<TextView>(R.id.detail2)
         val price = view.findViewById<TextView>(R.id.price)
         val amount = view.findViewById<TextView>(R.id.amount)
+        val imageResouce = when (item.menuName) {
+            "비타민 과일 박스 세트" -> R.drawable.image1
+            "매콤달콤 진미채 박스" -> R.drawable.image2
+            "명절 반찬 박스 세트" -> R.drawable.image3
+            "영양소 상큼 과일 세트" -> R.drawable.image4
+            "채소 세트" -> R.drawable.image5
+            else -> R.drawable.image6
+        }
 
-        imageView.setImageResource(item.imageResource)
+        imageView.setImageResource(imageResouce)
         store.text = item.store
         menuName.text = item.menuName
         detail1.text = item.detailName1
