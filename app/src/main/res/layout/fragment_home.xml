@@ -158,28 +158,19 @@
         app:srcCompat="@drawable/redrightarrow" />
 
 
-    <ImageView
-        android:id="@+id/searchmenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mask"
-        app:srcCompat="@drawable/search2" />
-
     <EditText
         android:id="@+id/namesearch"
-        android:textSize="12dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="411dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/search_mm"
         android:fontFamily="@font/poppins_bold"
         android:hint="도시락 이름을 검색해보세요."
-        app:layout_constraintStart_toEndOf="@+id/searchmenu"
+        android:paddingStart="40dp"
+        android:textSize="12dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mask" />
-
 
     <GridView
         android:id="@+id/homeGridView"
@@ -198,12 +189,14 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/location2"
         android:layout_width="31dp"
         android:layout_height="29dp"
-        app:srcCompat="@drawable/home_location"
-        tools:layout_editor_absoluteX="322dp"
-        tools:layout_editor_absoluteY="13dp" />
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/cart"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/home_location" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
