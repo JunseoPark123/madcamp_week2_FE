@@ -1,17 +1,12 @@
 package com.example.madcamp_week2_fe.ready
 
-import android.Manifest
-import android.content.pm.PackageManager
-import android.location.Location
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.appcompat.widget.AppCompatButton
+import com.example.madcamp_week2_fe.MainActivity
 import com.example.madcamp_week2_fe.R
 import com.example.madcamp_week2_fe.databinding.ActivityMapBinding
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -41,6 +36,14 @@ internal class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
         this.mapView = binding.mapView
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this@LocationActivity)
+
+        val nextButton = findViewById<AppCompatButton>(R.id.next)
+        nextButton.setOnClickListener {
+            // MainActivity로 이동
+            val intent = Intent(this@LocationActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish() // 현재 Activity 종료
+        }
 
     }
 
