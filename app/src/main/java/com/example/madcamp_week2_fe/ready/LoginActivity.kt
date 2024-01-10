@@ -79,6 +79,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUser(loginRequest: LoginRequest) {
+
+        if (loginRequest.password == "1234") {
+            Toast.makeText(this@LoginActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
+            return
+        }
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = userApiService.loginUser(loginRequest)
