@@ -37,8 +37,8 @@ class HomeGridAdapter(private val context: Context, private val items: List<Home
         detail1.text = item.detailName1
         detail2.text = item.detailName2
         detail3.text = item.detailName3
-        price.text = item.price.toString()
-        amount.text = item.amount.toString()
+        price.text = "${item.price}원"
+        amount.text = "${item.amount}개"
 
 
         return view

@@ -15,6 +15,8 @@ import com.example.madcamp_week2_fe.ready.LocationActivity
 import com.example.madcamp_week2_fe.R
 import com.example.madcamp_week2_fe.RetrofitClient
 import com.example.madcamp_week2_fe.interfaces.StoreApiService
+import com.example.madcamp_week2_fe.interfaces.UserApiService
+import com.example.madcamp_week2_fe.ready.LoginActivity
 import kotlinx.coroutines.*
 import java.lang.Exception
 
@@ -42,7 +44,7 @@ class HomeFragment : Fragment() {
 
         val logout : ImageView = view.findViewById(R.id.logout)
         logout.setOnClickListener{
-
+            logoutUser()
         }
 
         val cart: ImageView = view.findViewById(R.id.cart)
@@ -115,5 +117,27 @@ class HomeFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun logoutUser() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = RetrofitClient.getInstance().create(UserApiService::class.java).logoutUser()
+                if (response.isSuccessful) {
+                    Log.d("HomeFragment", "Logout successful")
+                    navigateToLoginActivity()
+                } else {
+                    Log.e("HomeFragment", "Failed to logout: ${response.errorBody()?.string()}")
+                }
+            } catch (e: Exception) {
+                Log.e("HomeFragment", "Error in logout: ${e.message}")
+            }
+        }
+    }
+
+    private fun navigateToLoginActivity() {
+        val intent = Intent(activity, LoginActivity::class.java)
+        startActivity(intent)
+        activity?.finish() // 현재 액티비티 종료
     }
 }

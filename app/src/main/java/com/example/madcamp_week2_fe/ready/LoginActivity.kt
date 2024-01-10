@@ -11,6 +11,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import com.example.madcamp_week2_fe.MainActivity
 import com.example.madcamp_week2_fe.R
@@ -29,6 +30,12 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        val createAccTextView: TextView = findViewById(R.id.CreateAcc) // TextView 참조 얻기
+        createAccTextView.setOnClickListener {
+            // TextView 클릭 시 RegisterActivity로 이동
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
         userApiService = RetrofitClient.getInstance().create(UserApiService::class.java)
 
         val btnBack: ImageView = findViewById(R.id.left_arrow)

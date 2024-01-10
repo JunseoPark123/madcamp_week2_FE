@@ -11,9 +11,25 @@ data class LoginResponse(
     val email: String,
     val username: String,
     val phone_number: String,
-    val current_location: String
+    val current_location: String?
 )
 
 data class LoginError(
     val detail: String
+)
+
+data class RegisterRequest(
+    val email: String,
+    val username: String,
+    val password: String,
+    val phone_number: String,
+    val current_location: String?
+)
+
+data class RegisterResponse(
+    val id: Int,
+    val email: String,
+    val username: String,
+    val phone_number: String,
+    val current_location: String?
 )
