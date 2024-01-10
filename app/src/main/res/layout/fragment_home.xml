@@ -171,34 +171,22 @@
         app:layout_constraintStart_toEndOf="@+id/searchmenu"
         app:layout_constraintTop_toBottomOf="@+id/mask" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/dipsbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/redbutton"
-        android:fontFamily="@font/poppins_bold"
-        android:text="찜한 가게"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchmenu" />
-
 
     <GridView
         android:id="@+id/homeGridView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:horizontalSpacing="8dp"
         android:numColumns="2"
         android:padding="16dp"
         android:verticalSpacing="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dipsbutton" />
+        app:layout_constraintTop_toBottomOf="@+id/namesearch"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
