@@ -238,7 +238,7 @@
         android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="12dp"
         android:background="@drawable/rectangle_3"
         android:enabled="false"
         android:fontFamily="@font/inter_black"

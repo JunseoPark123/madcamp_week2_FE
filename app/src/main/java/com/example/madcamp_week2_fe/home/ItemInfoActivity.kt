@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,7 +14,9 @@ import com.example.madcamp_week2_fe.MainActivity
 import com.example.madcamp_week2_fe.R
 import com.example.madcamp_week2_fe.RetrofitClient
 import com.example.madcamp_week2_fe.interfaces.CartApiService
+import com.example.madcamp_week2_fe.interfaces.StarApiService
 import com.example.madcamp_week2_fe.models.AddToCartRequest
+import com.example.madcamp_week2_fe.models.AverageRatingRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,6 +33,7 @@ class ItemInfoActivity : AppCompatActivity() {
         sharedPrefs = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
         val accessToken = sharedPrefs.getString("access_token", null)
         val storeName = intent.getStringExtra("store") ?: ""
+        val ratingTextView: TextView = findViewById(R.id.rate)
         initializeFavoriteIcon(storeName)
 
         val itemImageView: ImageView = findViewById(R.id.itemImage)
@@ -74,7 +78,7 @@ class ItemInfoActivity : AppCompatActivity() {
 
         val productName = intent.getStringExtra("menuName") ?: ""
         val productPrice = intent.getIntExtra("price", 0)
-
+        getAverageRating(storeName, ratingTextView)
         val btnCart: Button = findViewById(R.id.cart)
         btnCart.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
@@ -104,6 +108,23 @@ class ItemInfoActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun getAverageRating(storeName: String, textView: TextView) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val starApi = RetrofitClient.getInstance().create(StarApiService::class.java)
+                val response = starApi.getAverageRating(AverageRatingRequest(storeName))
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        val averageRating = response.body()?.average_rating ?: 0f
+                        textView.text = "별점: ${String.format("%.1f", averageRating)}"
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("ItemInfoActivity", "평균 별점 조회 실패: ${e.message}")
+            }
+        }
     }
 
     private fun initializeFavoriteIcon(storeName: String) {

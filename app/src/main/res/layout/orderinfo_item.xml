@@ -75,6 +75,7 @@
             android:layout_width="365dp"
             android:layout_height="40dp"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp"
             android:background="@drawable/button_background"
             android:fontFamily="@font/inter_bold"
             android:text="별점 남기기"
@@ -94,6 +95,18 @@
             android:text="가격"
             app:layout_constraintBottom_toTopOf="@+id/review"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="28dp"
+            android:text="별점"
+            android:fontFamily="@font/inter_black"
+            android:textSize="12dp"
+            app:layout_constraintStart_toEndOf="@+id/store"
+            app:layout_constraintTop_toTopOf="@+id/profileImage" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
